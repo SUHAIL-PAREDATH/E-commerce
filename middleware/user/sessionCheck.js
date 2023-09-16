@@ -1,6 +1,6 @@
 const sessionCheck=(req,res,next)=>{
     if(req.session.userID){
-        nexr()
+        next()
     }else{
         res.redirect('/register')
     }

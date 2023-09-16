@@ -33,19 +33,19 @@ module.exports={
                 res.redirect("/");
               } else {
                 res.render("user/login", {
-                  documentTitle: "User Sign In | TIMELESS",
+                  documentTitle: "User Sign In",
                   errorMessage: "Incorrect Password",
                 });
               }
             } else {
               res.render("user/login", {
-                documentTitle: "User Sign In | TIMELESS",
+                documentTitle: "User Sign In ",
                 errorMessage: "Unauthorized User",
               });
             }
           } else {
             res.render("user/login", {
-              documentTitle: "User Sign In | TIMELESS",
+              documentTitle: "User Sign In ",
               errorMessage: "User not found",
             });
         }

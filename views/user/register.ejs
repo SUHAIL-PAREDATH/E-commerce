@@ -13,7 +13,7 @@
 	<link rel="icon" type="image/png" href="/public/images/icons/mc-logo-letter-design-vector-14081808.jpg">
 
     <!-- Custom fonts for this template-->
-    <link href="/public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/admin/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -39,6 +39,7 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <p class="text-danger mt-0 pt-2 fw-bold"><%= locals.errorMessage %></p>
                             </div>
                             <form class="user" method="post" action="/register" onsubmit="return submitform('event')">
                                 <div class="form-group row">
@@ -69,7 +70,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input name="number" type="Number" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Number" required>
+                                        placeholder="Number" required >
                                 </div>
                                 <div class="text-center" id="error"></div>
                                 <p class="text-center text-danger" >
@@ -78,6 +79,9 @@
                                 <input class="btn btn-primary btn-user btn-block" value="NEXT" type="submit">
                             </form>
                             <hr>
+                            <div class="text-center">
+                                <a class="small" href="/login">login</a>
+                            </div>
                         </div>
                      </div>
                 </div>
@@ -89,6 +93,7 @@
         const userPassword = document.getElementById('userPassword')
         const usercPassword = document.getElementById('usercPassword')
         const error = document.getElementById('error')
+        const number=document.getElementById('exampleInputEmail')
         function hideErrorMessage() {
             error.innerHTML = "";
         }
@@ -109,6 +114,10 @@
                 showErrorMessage("Password must be Lessthan 13 characters");
                 return false;
             } 
+            if(number.value.length < 10) {
+                showErrorMessage("Number must be 10 digit")
+                return false;
+            }
             hideErrorMessage()
             return true;
         }

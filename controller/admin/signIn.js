@@ -4,7 +4,9 @@ const bcrypt=require("bcrypt")
 exports.getSignIn=(req,res)=>{
     try{
         res.render("admin/login",{
-            documentTitle:"Admin Sign in"
+            documentTitle:"Admin Sign in",
+            admin : true,
+            signIn : false,
         })
 
     }catch(error){
@@ -13,7 +15,6 @@ console.log("Error rendering admin signin Page: " + error);
 };
 exports.postSignIn=async(req,res)=>{
     try{
-        console.log("login hjk,");
         const inputEmail=req.body.email.toLowerCase();
         const inputPassword=req.body.password;
         const adminFind=await Admin.findOne({email:inputEmail});
@@ -28,13 +29,14 @@ exports.postSignIn=async(req,res)=>{
                 res.redirect("/admin/index")
             }else{
                 res.redirect('/admin',{
-                    documentTitle: "Admin Sign In | SHOE ZONE",
+                    documentTitle: "Admin Sign In",
                     errorMessage: "Incorrect Password",
+                    admin:true
                 })
             }
         }else{
             res.render('admin/login',{
-                documentTitle: "Admin Sign In | SHOE ZONE",
+                documentTitle: "Admin Sign In",
                 errorMessage: "Incorrect Password",
                 })
               }

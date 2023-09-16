@@ -2,11 +2,12 @@ const { render } = require("ejs");
 const express = require("express");
 const router = express.Router();
 const Users = require("../../model/user/userSchema");
-const newOTP = require("../../model/user/otp");
+const NewOTP = require("../../model/user/otp");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 require("dotenv").config({ path: ".env" });
 const { default: mongoose } = require("mongoose");
+const otp = require("../../model/user/otp");
 
 let msg = "";
 
@@ -51,6 +52,13 @@ module.exports = {
             const tempOTP = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
             req.session.tempOTP = tempOTP;
 
+            const newOTP=new NewOTP({
+              email:inputEmail,
+              otp:tempOTP
+            })
+            await newOTP.save()
+
+            
             //Transporter
             const transporter = await nodemailer.createTransport({
                 service: "gmail",
@@ -91,7 +99,7 @@ module.exports = {
   postOTP: async(req, res) => {
     try{
       if(req.session.tempOTP){
-        if(req.session.tempOTP=req.body.otp){
+        if(req.body.otp == req.session.tempOTP){
           console.log("Account creatipn OTP deleted"+req.session.tempOTP);
           const newUserDetails=new Users(req.session.newUserDetails)
 
@@ -114,4 +122,15 @@ module.exports = {
       console.log("Error verifying OTP: " + error);
     }
   },
+  reSendOTP:async(req,res)=>{
+    try {
+      const inputEmail=req.session.inputEmail
+      if(inputEmail){
+        
+      }
+      
+    } catch (error) {
+      
+    }
+  }
 };

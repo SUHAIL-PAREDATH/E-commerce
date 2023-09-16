@@ -12,9 +12,11 @@ const otpSchema=new Schema({
         type:String,
         require:true
     },
-    expiration:{
-        type:String,
-        require:true
+    expiresAt:{
+        type:Date,
+        default:Date.now,
+        require:true,
+        expires:60,
     }
 });
 

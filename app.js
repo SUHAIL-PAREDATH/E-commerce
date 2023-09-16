@@ -5,6 +5,7 @@ const logger=require('morgan')
 const mongoose=require('mongoose')
 const dotenv = require('dotenv')
 const session=require('express-session')
+const nocache=require('nocache')
 const crypto=require('crypto')
 const PORT =process.env.PORT|| 3000
 dotenv.config({path:'.env'})
@@ -23,6 +24,8 @@ const app = express()
 const db = require('./config/connection')
 db.dbConnect()
 
+// deleting cache
+app.use(nocache());
 
 const userRouter=require('./routes/user')
 const adminRouter=require('./routes/admin')
@@ -37,6 +40,11 @@ app.use(session({
     cookie:{maxAge:oneDay},
     resave:false
 }))
+
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  next();
+  });
 
 app.use(logger('dev'))
 app.use(express.json())

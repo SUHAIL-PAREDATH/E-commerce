@@ -12,7 +12,9 @@
     <title>users</title>
 
     <!-- Custom fonts for this template-->
-    <link href="/public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="#" rel="stylesheet" type="text/css">
+    <link href="/public/admin/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -65,7 +67,7 @@
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
+                                            <!-- <tfoot>
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Email</th>
@@ -75,51 +77,63 @@
                                                     <th>Address</th>
                                                     <th>Status</th>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot> -->
                                             <tbody>
-                                               
+                                                <%allUsers.forEach((user,index)=>{%>
 
                                                     <tr>
                                                         <td>
-                                                           
+                                                            <%= index+1 %>
                                                         </td>
                                                         <td>
-                                                            
+                                                            <%= user.email %>
                                                         </td>
                                                         <td>
-                                                            
+                                                            <%= user.fname %>
                                                         </td>
                                                         <td>
-                                                           
+                                                            <%= user.lname %>
                                                         </td>
                                                         <td>
-                                                           
+                                                            <%= user.number %>
                                                         </td>
-
+                                                        
                                                         <td>
                                                            
                                                                                     <br>
 
-                                                                                   
+                                                                                    
 
                                                         </td>
 
 
                                                         <td class="d-flex justify-content-center" id="userBlocked">
+                                                            <div id="<%=user._id %>">
+                                                            
                                                             
                                                                 <!-- Button trigger modal -->
-                                                                <button type="button" class="btn " data-toggle="modal"
-                                                                    data-target="#exampleModalblock"
-                                                                    style="color : rgb(255, 0, 0);">
-                                                                    Block
+                                                                <button type="button" class="btn "  data-toggle="modal" onclick="changeAccess('<%=user._id%>','<%=user.access%>')"
+                                                                    data-target="#exampleModalblock<%= user._id %>"
+                                                                    >
+                                                                    <!-- Block -->
+                                                                    <% if (user.access == true) {%>
+                                                                        <i
+                                                                          class="py-1 fa fa-lock-open fa-lg text-success"
+                                                                          aria-hidden="true"
+                                                                        ></i
+                                                                        ><span>Active</span>
+                                                                        <%}else{%>
+                                                                        <i class="py-1 fa fa-lock fa-lg text-danger" aria-hidden="true"></i
+                                                                        ><span>Inactive</span> <%} %>
                                                                 </button>
-                                                               
-                                                                    <div class="text-danger">Blocked</div>
-                                                                 
-                                                                        <div class="modal fade"
+                                                            </div>
+                                                                
+                                                                    <!-- <div class="text-danger">Blocked</div> -->
+                                                                    
+                                                                        <!-- <div class="modal fade"
                                                                             id="exampleModalblock"
                                                                             tabindex="-1" role="dialog"
-                                                                            aria-labelledby="exampleModalLabel"
+                                                                            aria-labelledby="exampleModalLabel<%= user._id%>"
                                                                             aria-hidden="true">
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
@@ -137,7 +151,7 @@
                                                                                     </div>
                                                                                     <div class="modal-body">
                                                                                         Are you sure you want to block
-                                                                                       
+                                                                                    
                                                                                     </div>
                                                                                     <div class="modal-footer">
                                                                                         <button type="button"
@@ -150,11 +164,11 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> -->
                                                         </td>
                                                     </tr>
 
-                                                   
+                                                    <%}) %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -210,48 +224,60 @@
 
     <script>
 
-        function blockUser(userId) {
-            fetch('/admin/blockUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userId
-                })
-            })
-                .then(response => response.json())
-                .then(response => {
-                    if (response.success) {
-                        location.reload()
+        // function blockUser(userId) {
+        //     fetch('/admin/blockUser', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             userId
+        //         })
+        //     })
+        //         .then(response => response.json())
+        //         .then(response => {
+        //             if (response.success) {
+        //                 location.reload()
+        //             }
+        //         })
+        // }
+
+
+
+        // $('#myModal').on('shown.bs.modal', function () {
+        //     $('#myInput').trigger('focus')
+        // })
+            function changeAccess(id,access){
+                $.ajax({
+                    url:'/admin/users',
+                    type:'patch',
+                    data:{
+                        userId:id,
+                        currentAccess:access,
+                    },
+                    success:(res)=>{
+                        $('#'+id).load(location.href+' #'+id);
                     }
-                })
-        }
-
-
-
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-        })
-
+                });
+            }
     </script>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/public/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/admin/js/sb-admin-2.min.js"></script>
+    <script src="/public/admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- <script src="/public/admin/vendor/datatables/jquery.dataTables.js"></script> -->
+    <script src="/public/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="/admin/js/demo/datatables-demo.js"></script>
+    <script src="/public/admin/js/demo/datatables-demo.js"></script>
 
 </body>
 

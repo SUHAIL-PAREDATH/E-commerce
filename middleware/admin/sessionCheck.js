@@ -3,7 +3,7 @@ const sessionCheck=(req,res,next)=>{
         next()
 
     }else{
-        res.redirect("/admin/")
+        res.redirect("/admin")
     }
 }
 module.exports=sessionCheck
