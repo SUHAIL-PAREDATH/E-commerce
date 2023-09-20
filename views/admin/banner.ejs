@@ -11,8 +11,12 @@
 
     <title>SB Admin 2 - Dashboard</title>
 
+<!-- ========bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
     <!-- Custom fonts for this template-->
-    <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/admin/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -41,6 +45,131 @@
 
                 <!-- End of Topbar -->
 
+<!-------------Modal for add banner ---------------->
+<div class="container d-flex justify-content-center my-3">
+      
+    <button
+        type="button"
+        class="btn btn-dark text-center"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Add New Banner
+      </button>
+    </div>
+    <span
+      class="text-center pb-3"
+      style="font-size: 0.8rem; text-transform: none"
+      >
+      <p class="text-danger mt-0 fw-bold text-uppercase">
+        <%= locals.errorMessage %>
+      </p>
+    </span>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Add New Banner
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+              
+              <!-- -------------------- -->
+
+
+              <form action="" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload Image</label>
+                  <input
+                    class="form-control"
+                    id="form-holder"
+                    name="bannerImage"
+                    type="file"
+                    onchange="bannerPreview(event)"
+                  />
+                  <div>
+                    <p><img src="" alt="" style="width: 150px;" id="banner-preview"></p>
+                  </div>
+                </div>
+
+                  <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        placeholder="Title"
+                        name="title"
+                        required
+                        
+                      />
+                     
+                    </div>
+                 
+                  <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        placeholder="Descrpition"
+                        name="description"
+                      />
+                    </div>
+                  <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        placeholder="URL"
+                        name="url"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="form-holder"
+                        placeholder="Video URL"
+                        name="videoURL"
+                      />
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-success">
+                  Save changes
+                </button>
+                </form>
+
+
+<!-- ------------------- -->
+          
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- -------------------------------------------- -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -55,7 +184,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-
+                                <%if(allBanners!=null){%>
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -64,53 +193,76 @@
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>URL</th>
+                                            <th>Video</th>
+                                            <th>updatedBy</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
+                                        <!-- <tr>
                                            
                                             <th>images</th>
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>URL</th>
                                             <th>Action</th>
-                                        </tr>
+                                        </tr> -->
                                     </tfoot>
                                     <tbody>
-                                     
+                                     <%allBanners.forEach(function(item,i){%>
                                             
 
                                                 <tr>
                                                   
-                                                    <td><img style="height: 10vh; width: 10vh;"
-                                                            src="" alt=""></td>
-
-                                                    <td>
+                                                    <td><%if(item.Image){ %><%=item.Image%><%}else{%>None<%}%></td>
                                                         
+                                                    <td>
+                                                        <%=item.title%>
                                                     </td>
                                                     <td>
-                                                        
+                                                        <%=item.description%>
                                                     </td>
                                                     <td>
-                                                        
+                                                       <%if(item.url){%><%=item.url%><%}else{%>None<%}%> 
                                                     </td>
-                                                    <td class="d-flex justify-content-center">
+                                                    <td>
+                                                        <%if(item.videoURL){%><a href="<%= item.videoURL %>" target="_blank"><b class="text-primary">Video Link</b></a><%}else{%>None<%}%>
+                                                    </td>
+                                                    <td>
+                                                        class="<%=item._id%>"><%= item.updatedBy %>
+                                                    </td>
+                                                    <!-- <td class="d-flex justify-content-center"> -->
+                                                        <td class="text-center" style="width: 20%">
+                                                            <div id="<%=item._id%>" class="d-flex flex-column">
+                                                              <button class="btn btn-sm btn-dark w-100" onclick="changeActivity('<%=item._id%>', '<%=item.active%>')">
+                                                                <% if (item.active == true) { %>
+                                                                  <i class="py-1 fa fa-lock-open fa-lg text-success" aria-hidden="true"></i>
+                                                                  <span>Active</span>
+                                                                <% } else { %>
+                                                                  <i class="py-1 fa fa-lock fa-lg text-danger" aria-hidden="true"></i>
+                                                                  <span>In-Active</span>
+                                                                <% } %>
+                                                              </button>                  
+                                                            <button class="btn btn-sm btn-dark text-danger my-1" onclick="deleteBanner('<%=item._id%>')"><i class="py-1 fa fa-trash fa-lg text-danger" aria-hidden="true" ></i ><span>Delete</span></button>
+                                                            </div>
 
-
-                                                        <a class="btn"
+                                                        <!-- <a class="btn"
                                                             href="/admin/editBanner">Edit
-                                                        </a>
+                                                        </a> -->
 
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn " data-toggle="modal"
+
+                                                        <!-- ========================= -->
+
+                                                        
+                                                        <!-- <button type="button" class="btn " data-toggle="modal"
                                                             data-target="#exampleModalCenter"
                                                             style="color : rgb(255, 0, 0);">
                                                             Delete
-                                                        </button>
+                                                        </button> -->
 
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                        <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1"
                                                             role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                             aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered"
@@ -143,7 +295,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
 
 
 
@@ -152,9 +304,10 @@
 
                                                 </tr>
                                               
-                                                   
+                                              <%})%>     
                                     </tbody>
                                 </table>
+                                <%}%>
                             </div>
                         </div>
                     </div>
@@ -197,27 +350,31 @@
         </div>
     </div>
 
+    <script src="/public/admin/js/admin.js"></script>
 
     <!-- toaster -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Bootstrap core JavaScript-->
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/public//admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/public/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="/admin/js/sb-admin-2.min.js"></script>
+    <script src="/public/admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/public/admin/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/public/admin/vendor/datatables/dataTables.bootstrap4.min.css"></script>
+
 
     <!-- Page level custom scripts -->
-    <script src="/admin/js/demo/datatables-demo.js"></script>
+    <script src="/public//admin/js/demo/datatables-demo.js"></script>
 
+    <!-- ===========bootstrap=============== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>

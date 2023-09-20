@@ -12,9 +12,6 @@ const otp = require("../../model/user/otp");
 let msg = "";
 
 module.exports = {
-  getHome: (req, res) => {
-    res.render("user/index");
-  },
 
   getRegister: (req, res) => {
     try {

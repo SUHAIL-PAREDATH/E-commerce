@@ -55,10 +55,18 @@
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
-						<a href="/login" class="flex-c-m trans-04 p-lr-25">
-							Login
-						</a>
+						<%if(session){%>
+							<span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-2">
+								<a href="/logOut" class="flex-c-m trans-04 p-lr-25">
+									LogOut
+								</a>
+								  <% }else{%>
+									<a href="/login" class="flex-c-m trans-04 p-lr-25">
+										Login
+									</a>
+									<%}%>
+							  </span>	
+						
 
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							EN
@@ -335,7 +343,7 @@
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(/public/images/slide-01.jpg);">
+				<div class="item-slick1" style="background-image: url(/public/images/rolex_1.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -359,7 +367,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(/public/images/slide-02.jpg);">
+				<div class="item-slick1" style="background-image: url(/public/images/banner-3.webp);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -383,7 +391,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(/public/images/slide-03.jpg);">
+				<div class="item-slick1" style="background-image: url(/public/images/banner-1.webp);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">

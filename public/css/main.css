@@ -225,7 +225,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ Top bar ]*/
 .top-bar {
   height: 40px;
-  background-color: #222;
+  background-color: #ececec;
 }
 
 /*---------------------------------------------*/
@@ -233,7 +233,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   font-family: Poppins-Regular;
   font-size: 12px;
   line-height: 1.8;
-  color: #b2b2b2;
+  color: black !important;
 }
 
 
@@ -244,7 +244,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   line-height: 1.8;
 
   height: 100%;
-  color: #b2b2b2;
+  color: black !important;
   border-right: 1px solid rgba(255,255,255,0.3);
 }
 
@@ -1215,7 +1215,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .item-slick1 {
-  height: calc(100vh - 40px);
+  margin: 1.7%;
+  height: calc(88vh - 40px);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

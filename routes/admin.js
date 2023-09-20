@@ -6,6 +6,8 @@ const userControlle=require("../controller/admin/users")
 const product=require('../controller/admin/product')
 const category= require('../controller/admin/category')
 const brands=require('../controller/admin/brands')
+const banners=require('../controller/admin/banner')
+const upload=require('../utilities/imageUpload')
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
@@ -70,7 +72,14 @@ router
 .route('/products')
 .get(product.view)
 
-//========================== ==============================
+//==========================Banners ==============================
+
+router
+.route('/banner')
+.get(banners.bannerPage)
+.post(upload.single('bannerImage'),banners.addBanner)
+.patch(banners.changeActivity)
+.delete(banners.deleteBanner)
 
 
 

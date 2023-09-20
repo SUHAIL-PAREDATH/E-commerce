@@ -28,7 +28,7 @@ exports.postSignIn=async(req,res)=>{
                 console.log("admin success")
                 res.redirect("/admin/index")
             }else{
-                res.redirect('/admin',{
+                res.render('admin/login',{
                     documentTitle: "Admin Sign In",
                     errorMessage: "Incorrect Password",
                     admin:true
