@@ -72,6 +72,21 @@ router
 .route('/products')
 .get(product.view)
 
+// add product
+
+router
+.route('/products/add_product')
+.post(upload.fields([
+    {name:"frontImage",maxCount:1},
+    {name:"thumbnail",maxCount:1},
+    {name:"images",maxCount:3}
+])
+    ,product.addProduct)
+
+// edit product
+router
+.route('/products/edit_product')
+.get(product.editProductPage)
 //==========================Banners ==============================
 
 router
