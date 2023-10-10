@@ -318,9 +318,9 @@
                                                     <td ><div class="text-center d-flex flex-column">
                                                         <a href="/admin/products/edit_product?id=<%= item._id %>" onclick="return confirm('Proceed to edit <%= item.name %> ?')" class="btn btn-dark text-white btn-sm my-1">Edit</a>
                                                       <% if(item.listed==true){ %> 
-                                                      <a href="/admin/product/changeListing?id=<%= item._id %>" onclick="return confirm('Proceed to change listing of <%= item.name %> ?')" class="btn btn-danger text-white btn-sm  my-1">Unlist</a>
+                                                      <a href="/admin/products/changeListing?id=<%= item._id %>" onclick="return confirm('Proceed to change listing of <%= item.name %> ?')" class="btn btn-danger text-white btn-sm  my-1">Unlist</a>
                                                     <% }else{ %>
-                                                      <a href="/admin/product/changeListing?id=<%= item._id %>" onclick="return confirm('Proceed to change listing of <%= item.name %> ?')" class="btn btn-success text-white btn-sm my-1">List</a>
+                                                      <a href="/admin/products/changeListing?id=<%= item._id %>" onclick="return confirm('Proceed to change listing of <%= item.name %> ?')" class="btn btn-success text-white btn-sm my-1">List</a>
                                                       <% } %>
                                                       </div> </td>
                                                     

@@ -8,6 +8,9 @@ const nodemailer = require("nodemailer");
 require("dotenv").config({ path: ".env" });
 const { default: mongoose } = require("mongoose");
 const otp = require("../../model/user/otp");
+const cartModel=require("../../model/user/cart")
+const wishlistModel=require("../../model/user/wishlist")
+
 
 let msg = "";
 
@@ -95,39 +98,101 @@ module.exports = {
   
   postOTP: async(req, res) => {
     try{
-      if(req.session.tempOTP){
-        if(req.body.otp == req.session.tempOTP){
-          console.log("Account creatipn OTP deleted"+req.session.tempOTP);
-          const newUserDetails=new Users(req.session.newUserDetails)
+      
+      // if(req.session.tempOTP){
+      //   if(req.body.otp == req.session.tempOTP){
+      //     console.log("============Account creatipn OTP deleted"+req.session.tempOTP);
+      //     const newUserDetails=new Users(req.session.newUserDetails)
 
-          newUserDetails.save();
-          req.session.tempOTP=false;
-          res.redirect("/login")
-        }else{
-          console.log("otp errorrrrrr");
-          res.render("user/otp", {
+      //     newUserDetails.save();
+      //     req.session.tempOTP=false;
+      //     res.redirect("/login")
+      //   }else{
+      //     console.log("otp errorrrrrr");
+      //     res.render("user/otp", {
             
-            documentTitle: "OTP Verification ",
-            errorMessage: "Invalid OTP",
-          });
-        }
-      }else {
-        res.redirect("/register");
-      }
+      //       documentTitle: "OTP Verification ",
+      //       errorMessage: "Invalid OTP",
+      //     });
+      //   }
+      // }else {
+      //   res.redirect("/register");
+      // }
 
+      const otpChecker=await otp.findOne({otp:req.body.otp})
+      if(otpChecker){
+        const newUserDetails=new Users(req.session.newUserDetails);
+        newUserDetails.save();
+        const existUserDetails=await Users.findOne({email:otpChecker.email})
+        const userID=existUserDetails._id;
+
+        const newCart=new cartModel({
+          customer:new mongoose.Types.ObjectId(userID),
+        });
+        await Users.findByIdAndUpdate(userID,{
+          $set: { cart:new mongoose.Types.ObjectId(newCart._id) },
+        });
+        await newCart.save();
+  
+        const newWishlist=new wishlistModel({
+          customer:new mongoose.Types.ObjectId(userID)
+        });
+        await Users.findByIdAndUpdate(userID,{
+          $set:{wishlist:new mongoose.Types.ObjectId(newWishlist._id)},
+        });
+        await newWishlist.save()
+
+        res.redirect('/login')
+      }else{
+        res.render('users/otp',{
+          documentTitle: "OTP Verification",
+          errorMessage: "Invalid OTP",
+          newUserDetails:null,
+        })
+      }
+      
     }catch(error){
       console.log("Error verifying OTP: " + error);
     }
   },
   reSendOTP:async(req,res)=>{
-    try {
-      const inputEmail=req.session.inputEmail
+    console.log("heeeeeeeeeeeeee");
+    const inputEmail = req.session.inputEmail;
+    
       if(inputEmail){
-        
+            const otp = `${Math.floor(1000+Math.random()*9000)}`
+                  console.log(otp +'otp');
+                  req.session.otp = otp;
+
+                  const newOTP = new NewOTP({
+                        email : inputEmail,
+                        otp : otp,
+                  });
+                  await newOTP.save();
+                   // creating transporter
+                  let transporter = nodemailer.createTransport({
+                        service:'Gmail',
+                        auth: {
+                              user : process.env.TRANSPORTER_USERNAME,
+                              pass : process.env.TRANSPORTER_PASSWORD,
+                        },
+                  });
+                  // mail options
+                  let mailOptions = {
+                        from:process.env.TRANSPORTER_USERNAME,
+                        to: inputEmail,
+                        subject : "OTP Verification | LAP4YOU eCommerce",
+                        html: `<h1>OTP</h1></br><h2 style="text-color: red, font-weight: bold">${otp}</h2></br><p>Enter the OTP to create account.</p>`,
+                  };
+
+                  transporter.sendMail(mailOptions, (error, info)=> {
+                        if(error){
+                              console.log('error Occured : '+error);
+                        } else{
+                              console.log(`OTP sent successfully ${otp}`);
+                              res.redirect('/otp');
+                        }
+                  });
       }
-      
-    } catch (error) {
-      
-    }
   }
 };

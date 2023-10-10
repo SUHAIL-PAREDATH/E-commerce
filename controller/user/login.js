@@ -26,7 +26,7 @@ module.exports={
             const hashedCheck = await bcrypt.compare(
               inputPassword,
               userFind.password
-            );
+            );  
             if (userFind.access == true) {
               if (hashedCheck) {
                 req.session.userID = userFind._id;

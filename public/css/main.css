@@ -1215,8 +1215,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .item-slick1 {
-  margin: 1.7%;
-  height: calc(88vh - 40px);
+  /* margin: 1.7%; */
+  height: calc(89vh - 40px);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -2131,7 +2131,7 @@ input.num-product::-webkit-inner-spin-button {
 ==================================================================*/
 .cl0 {color: #fff;}
 .cl1 {color: #717fe0;}
-.cl2 {color: #f8f8f8;}
+.cl2 {color: #050505;}
 .cl3 {color: #666;}
 .cl4 {color: #999;}
 .cl5 {color: #222;}
@@ -2359,10 +2359,11 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .ltext-103 {
-  font-family: Poppins-Bold;
-  font-size: 36px;
-  line-height: 1.1;
+  font-family: Poppins-Regular;
+  font-size: 32px;
+  line-height: 1.2;
   text-transform: uppercase;
+  margin-bottom: 20PX;
 }
 
 .ltext-104 {

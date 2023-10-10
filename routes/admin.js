@@ -68,6 +68,7 @@ router
 .route('/brands/delete')
 .get(brands.deleteBrand)
 //========================== Product  ==============================
+
 router
 .route('/products')
 .get(product.view)
@@ -87,6 +88,18 @@ router
 router
 .route('/products/edit_product')
 .get(product.editProductPage)
+.post(upload.fields([
+    {name:"frontImage",maxCount:1},
+    {name:"thumbnail",maxCount:1},
+    {name:"images",maxCount:3}
+]),
+    product.editProduct)
+
+// unlist product
+router
+.route("/products/changeListing")
+.get(product.changeListing)
+
 //==========================Banners ==============================
 
 router

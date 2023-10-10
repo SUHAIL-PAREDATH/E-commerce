@@ -48,7 +48,7 @@
 
 </head>
 
-<body class="bg-gradient-primary animsition">
+<body class="bg-gradient-primary" style="height: auto;">
 
     <div class="container p-t-100">
 
@@ -56,21 +56,28 @@
             <div class="card-body p-0 ">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block "><img src="/public/img/products/watches_frontImage_1695391921411.png" alt=""></div>
-                    <div class="col-lg-7">
+                    <!-- <div class="col-lg-5 d-none d-lg-block "><img src="/public/img/products/watches_frontImage_1695391921411.png" alt=""></div> -->
+                    <div class="col-lg-7 m-auto">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Edit Product
                                 </h1>
+                                <hr>
                             </div>
-                            <form class="user" method="post" action="/product/editProduct?_method=put" id="edit">
+                            <!-- <form class="user" method="post" action="" id="edit">
                                 <input type="text" value="" style="display: none;" name="id">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="name">Product Name : </label>
+                                        <label for="name">Name </label>
                                         <input type="text" name="name" class="form-control form-control-user"
-                                            id="name" placeholder="Product Name"
-                                            value="">
+                                            id="name" placeholder="Name"
+                                            value="<%=product.name%>">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="name">Name </label>
+                                        <input type="text" name="name" class="form-control form-control-user"
+                                            id="name" placeholder="Name"
+                                            value="<%=product.name%>">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="mrp">MRP</label>
@@ -112,9 +119,186 @@
                                     </div>
                                 </div>
                                 <input value="Edit Product" type="submit" class="btn btn-primary btn-user btn-block">
-                                <!-- <hr> -->
+                                <hr>
 
-                            </form>
+                            </form> -->
+
+                            
+                            <form action="" method="post" enctype="multipart/form-data" class="container row flex-column my-2">
+                                <div class="mb-3 col-lg-6">
+                                  <label for="name" class="px-1" style="font-size: 0.75rem;">Name</label>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    value="<%= product.name %>"
+                                    name="name"
+                                    placeholder="Name"
+                                  />
+                                </div>
+                                <div class="mb-3 col-lg-6 d-flex flex-column">
+                                    <label for="thumbnail" class="px-1" style="font-size: 0.75rem;">Upload Thumbnail</label>
+                                    <img class=" border" src="/Public/img/products/<%=product.thumbnail%>" width="150px"  alt="">
+                                  <input
+                                    class="form-control"
+                                    id="thumbnail"
+                                    name="thumbnail"
+                                    type="file"
+                                  />
+                                </div>
+                                <div class="mb-3 col-lg-6 d-flex flex-column">
+                                  <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload front image</label>
+                                  <img class=" border" src="/Public/img/products/<%=product.frontImage%>" width="150px"  alt="">
+                                <input
+                                  class="form-control"
+                                  id="frontImage"
+                                  name="frontImage"
+                                  type="file"
+                                />
+                              </div>
+                              <div class="mb-3 col-lg-6 d-flex flex-column">
+                                <label for="frontImage" class="px-1" style="font-size: 0.75rem;">Upload images (Only 3)</label>
+                                <div class="row">
+                                  <%product.images.forEach((image)=>{%><img class="col-8 col-lg-4 border" src="/Public/img/products/<%=image%>" width="150px"  alt=""><%})%>
+                                </div>
+                              <input
+                                class="form-control"
+                                id="frontImage"
+                                name="images"
+                                type="file"
+                                multiple
+                              />
+                            </div>
+                                <div class="mb-3 col-lg-6">
+                                  <select id="inputState" class="form-control" name="category"  required> 
+                                    <option value="<%=product.category._id%>" class="fw-bold" selected><%=product.category.name%></option> 
+                                    <%categories.forEach((data)=>{%> 
+                                      <option value="<%=data._id%>"><%=data.name%></option> 
+                                    <%})%> 
+                                  </select>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                    <select id="inputState" class="form-control" name="brand"  required> 
+                                        <option value="<%=product.brand._id%>" class="fw-bold" selected><%=product.brand.name%></option> 
+                                        <%brands.forEach((data)=>{%> 
+                                          <option value="<%=data._id%>"><%=data.name%></option> 
+                                        <%})%> 
+                                      </select>
+                                </div>
+                                <div class="mb-3 col-lg-6">
+                                <label for="Color" class="px-1" style="font-size: 0.75rem;">Color</label>  
+                                  <input
+                                      type="text"
+                                      class="form-control"
+                                      id="Color"
+                                      placeholder="Color"
+                                      name="color"
+                                      value="<%= product.color %>"
+                                      required
+                                    />
+                                  </div>
+                                <div class="mb-3 col-lg-6">
+                                <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="Price"
+                                      placeholder="Price"
+                                      name="price"
+                                      value="<%= product.price %>"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="stock" class="px-1" style="font-size: 0.75rem;">Stock</label>  
+                                    <input
+                                      type="number"
+                                      class="form-control"
+                                      id="stock"
+                                      placeholder="Stock"
+                                      name="stock"
+                                      value="<%= product.stock %>"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="refNumber" class="px-1" style="font-size: 0.75rem;">Reference Number</label>  
+                                <input
+                                      type="number"
+                                      class="form-control"
+                                      id="refNumber"
+                                      placeholder="Reference Number"
+                                      name="referenceNumber"
+                                      value="<%=product.referenceNumber%>"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="caseMaterial" class="px-1" style="font-size: 0.75rem;">Model Case</label>  
+                                <input
+                                      type="text"
+                                      class="form-control"
+                                      id="caseMaterial"
+                                      placeholder="Case Material"
+                                      name="caseMaterial"
+                                      value="<%= product.caseMaterial %>"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="waterRes" class="px-1" style="font-size: 0.75rem;">Water Resistance</label>  
+                                <input
+                                      type="text"
+                                      class="form-control"
+                                      id="waterRes"
+                                      value="<%=product.waterResistance%>"
+                                      placeholder="Water Resistance"
+                                      name="waterResistance"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                    <label for="warranty" class="px-1" style="font-size: 0.75rem;">Power Resistance</label>  
+                                    <input
+                                          type="text"
+                                          class="form-control"
+                                          id="warranty"
+                                          value="<%=product.warranty%>"
+                                          placeholder="warranty"
+                                          name="warranty"
+                                          required
+                                        />
+                                      </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="movement" class="px-1" style="font-size: 0.75rem;">Movement</label>  
+                                <input
+                                      type="text"
+                                      class="form-control"
+                                      value="<%= product.movement %>"
+                                      id="movement"
+                                      placeholder="Movement"
+                                      name="movement"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="mb-3 col-lg-6">
+                                <label for="strapMaterial" class="px-1" style="font-size: 0.75rem;">Bracelet</label>  
+                                <input
+                                      type="text"
+                                      value="<%= product.strapMaterial %>"
+                                      class="form-control"
+                                      id="strapMaterial"
+                                      placeholder="strapMaterial"
+                                      name="strapMaterial"
+                                      required
+                                    />
+                                  </div>
+                                  <div class="float-end mb-5">
+                                    <a href="/admin/product_management" onclick="return confirm('Discard Changes ?')" class="btn btn-secondary text-white my-1">Cancel</a>
+                                    <button type="submit" class="btn btn-success my-1">
+                                      <span>Save changes</span>
+                                    </button>
+                                    </form>
                             <hr>
 
                         </div>
@@ -127,7 +311,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/public/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src= "/public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/public/admin/vendor/jquery-easing/jquery.easing.min.js"></script>

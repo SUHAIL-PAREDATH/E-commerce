@@ -23,9 +23,27 @@ const userSchema=new mongoose.Schema({
     access:{
         type:Boolean,
         default:true 
-    }
+    },
+    cart: {
+        type: mongoose.Types.ObjectId,
+        ref: "Cart",
+      },
+    wishlist:{
+        type:mongoose.Types.ObjectId,
+        ref:"Wishlist",
+    },
+    orders:[{
+        type:mongoose.Types.ObjectId,
+        ref:"Orders",
+    },
+    ],
+    couponsUsed:[{
+        type:mongoose.Types.ObjectId,
+        ref:"Coupon",
+    },
+    ]
 
-})
+},{timestamps:true});
 const Users=mongoose.model('User',userSchema)
 
 module.exports =Users;
