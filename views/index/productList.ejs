@@ -8,10 +8,145 @@
 	<%- include('./partials/header') -%>
 	
 	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140">
+	<div class="bg0 m-t-23 p-3">
 		<div class="container">
-			
-			<%if(listing!=null){%>
+			<!-- <div class="d-flex justify-content-center pb-5 text-uppercase"> <h4><%=listingName%></h4></div> -->
+			<div class="text-center  d-flex justify-content-between px-4 ">
+<!-- filter  -->
+				
+
+				<div class="btn-group dropright " >
+					<a role="button"  href="" class="btn btn btn-outline-dark  dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Filter<i class="bi bi-filter"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<%brands.forEach((brand, i) => {%>
+					<li>
+						
+						<label class="dropdown-item  d-flex" >
+							<input class="d-none"
+							type="radio",
+							name="filerOption"
+							onclick="filter('<%=brand.name%>', '<%=brand._id%>' , '<%=listingName%>')"
+							><%=brand.name%>
+						</label>
+					</li>	
+					
+					<%})%>
+					<hr>
+					<li>
+						<label class="dropdown-item">
+						<input class="d-none"
+							type="radio"
+							name="filterOption"
+							onclick="removeFilter('none')"
+						  >
+						  NO Filter
+						</label>
+					</li>
+					
+						</ul>
+				</div>
+				<span
+				class="font-weight-bold d-none d-lg-block text-uppercase"
+				style="font-size: 1.25rem"
+				><%=listingName%></span
+			  >
+			  <!-- <div class="btn-group dropright">
+					<button type="button" class="btn btn btn-outline-dark  dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Filter<i class="bi bi-filter"></i>
+					</button>
+					<div class="dropdown-menu">
+					<a class="dropdown-item" href="/categories?category=men">MEN</a>
+					<a class="dropdown-item" href="/categories?category=women">WOMEN</a>
+					<a class="dropdown-item" href="/categories?category=kids">kids</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Separated link</a>
+					</div>
+				</div> -->
+
+				<div class="btn-group dropright " >
+					<a role="button" href="#" class="btn btn btn-outline-dark  dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					SORT<i class="bi bi-filter"></i>
+					</a>
+					<ul class="dropdown-menu">
+						
+					<li>
+						
+						<label class="dropdown-item" >
+							<span 
+							name="filerOption"
+							onclick="sortBy('newReleases')"
+							>New Releases</span>
+						</label>
+					</li>
+					<li>
+						
+						<label class="dropdown-item" >
+							<span 
+							name="filerOption"
+							onclick="sortBy('ascending')"
+							>Low to High</span>
+						</label>
+					</li>
+					<li>
+						
+						<label class="dropdown-item" >
+							<span 
+							name="filerOption"
+							onclick="sortBy('descending')"
+							>High to Low</span>
+						</label>
+					</li>
+					
+						
+					
+
+					<!-- <li>
+						<label class="dropdown-item">
+						<input
+							type="radio"
+							name="filterOption"
+							onclick="removeFilter('none')"
+						  >
+						  NO Filter
+						</label>
+					</li> -->
+					
+						</ul>
+				</div>
+				
+			  
+
+			 
+				
+
+			</div>
+			<hr>
+			<div class="container  text-center pb-5">
+				<div class="input-group flex-nowrap my-auto mx-auto" style="width: 250px">
+				  <input
+					type="text"
+					id="searchInput"
+					onkeyup="search('<%=listingName%>')"
+					class="form-control"
+					placeholder="Search"
+					aria-label="Search"
+					aria-describedby="addon-wrapping"
+				  />
+				  <span class="input-group-text" id="searchButton"
+					><button
+					  class="btn bg-transparent btn-sm"
+					  style="font-size: 0.75rem"
+					  onclick="removeFilter('none')"
+					>
+					  All Products<br /></button
+				  ></span>
+				</div>
+			  </div>
+	
+<div id="productContainer">
+			<%if(listing!==null){%>
 			<div class="row isotope-grid">
 				<%listing.forEach(product=>{%>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
@@ -59,6 +194,7 @@
 				
 			</div>
 			<%}%>
+		</div>
 			<!-- Load more -->
 			<div class="flex-c-m flex-w w-full p-t-45">
 				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
@@ -335,6 +471,8 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="/public/js/main.js"></script>
+
+	<script src="/public/js/productListing.js"></script>
 
 </body>
 </html>

@@ -33,6 +33,7 @@ exports.view =async(req,res)=>{
           })
           men=men.slice(0,4)
           women=women.slice(0,4)
+          kids=kids.slice(0,4)
 
           res.render("index/landingPage",{
             session:req.session.userID,

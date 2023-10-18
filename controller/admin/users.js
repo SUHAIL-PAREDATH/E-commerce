@@ -27,6 +27,8 @@ exports.changeAccess=async(req,res)=>{
         res.json({
             data:{newAccess : currentAccess},
         })
+        
+        
     } catch (error) {
         console.log("Error Changing User Access :" + error);
     }

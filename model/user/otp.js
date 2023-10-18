@@ -16,7 +16,7 @@ const otpSchema=new Schema({
         type:Date,
         default:Date.now,
         require:true,
-        expires:60,
+        expires:55,
     }
 });
 

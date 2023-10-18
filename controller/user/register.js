@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 require("dotenv").config({ path: ".env" });
 const { default: mongoose } = require("mongoose");
-const otp = require("../../model/user/otp");
+// const otp = require("../../model/user/otp");
 const cartModel=require("../../model/user/cart")
 const wishlistModel=require("../../model/user/wishlist")
 
@@ -41,6 +41,7 @@ module.exports = {
         req.session.newUserDetails=newUserDetails
         const inputEmail=req.body.email;
         const inputNumber=req.body.number;
+        req.session.inputEmail = inputEmail;
         const emailCheck = await Users.findOne({ email: inputEmail });
         const numberCheck = await Users.findOne({ number: inputNumber });
         if(emailCheck||numberCheck){
@@ -49,7 +50,7 @@ module.exports = {
                 errorMessage:'user already existig'
             })
         }else{
-            const tempOTP = Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000;
+            const tempOTP = `${Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000}`
             req.session.tempOTP = tempOTP;
 
             const newOTP=new NewOTP({
@@ -57,7 +58,6 @@ module.exports = {
               otp:tempOTP
             })
             await newOTP.save()
-
             
             //Transporter
             const transporter = await nodemailer.createTransport({
@@ -77,7 +77,7 @@ module.exports = {
               };
               //send mail
               await transporter.sendMail(mailOptions);
-              console.log("Account creation OTP Sent: " + req.session.tempOTP);
+              console.log("Account creation OTP Sent: " + `${tempOTP}`);
               res.redirect('/otp')
         }
     }catch(error){
@@ -98,33 +98,18 @@ module.exports = {
   
   postOTP: async(req, res) => {
     try{
-      
-      // if(req.session.tempOTP){
-      //   if(req.body.otp == req.session.tempOTP){
-      //     console.log("============Account creatipn OTP deleted"+req.session.tempOTP);
-      //     const newUserDetails=new Users(req.session.newUserDetails)
-
-      //     newUserDetails.save();
-      //     req.session.tempOTP=false;
-      //     res.redirect("/login")
-      //   }else{
-      //     console.log("otp errorrrrrr");
-      //     res.render("user/otp", {
-            
-      //       documentTitle: "OTP Verification ",
-      //       errorMessage: "Invalid OTP",
-      //     });
-      //   }
-      // }else {
-      //   res.redirect("/register");
-      // }
-
-      const otpChecker=await otp.findOne({otp:req.body.otp})
+      const otp=req.body.otp;
+      const inputEmail=req.session.inputEmail
+      const otpChecker=await NewOTP.findOne({otp:otp,email:inputEmail})
+      console.log(otpChecker.email);
       if(otpChecker){
         const newUserDetails=new Users(req.session.newUserDetails);
         newUserDetails.save();
-        const existUserDetails=await Users.findOne({email:otpChecker.email})
-        const userID=existUserDetails._id;
+        console.log(newUserDetails);
+        // const existUserDetails=await Users.findOne({email:otpChecker.email})
+        // console.log(existUserDetails ); 
+
+        const userID=newUserDetails._id;
 
         const newCart=new cartModel({
           customer:new mongoose.Types.ObjectId(userID),
@@ -144,19 +129,18 @@ module.exports = {
 
         res.redirect('/login')
       }else{
-        res.render('users/otp',{
+        res.render('user/otp',{
           documentTitle: "OTP Verification",
           errorMessage: "Invalid OTP",
           newUserDetails:null,
         })
       }
-      
+    
     }catch(error){
       console.log("Error verifying OTP: " + error);
     }
   },
   reSendOTP:async(req,res)=>{
-    console.log("heeeeeeeeeeeeee");
     const inputEmail = req.session.inputEmail;
     
       if(inputEmail){

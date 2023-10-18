@@ -5,6 +5,7 @@ const login=require('../controller/user/login')
 const logOut=require('../controller/user/logOut')
 const sessionCheck=require('../middleware/user/sessionCheck')
 const cart= require('../controller/user/cart')
+const checkout=require('../controller/user/checkout')
 
 
 // ==============LOGIN============ 
@@ -42,4 +43,9 @@ router
 .delete(sessionCheck,cart.removeProduct)
 .put(sessionCheck,cart.countChange)
 
+// ==============check OUt======================
+
+router
+.route('/cart/checkout')
+.get(sessionCheck,checkout.viewPage)
 module.exports=router;

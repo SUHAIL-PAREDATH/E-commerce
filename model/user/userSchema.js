@@ -11,14 +11,13 @@ const userSchema=new mongoose.Schema({
     password:String,
     cpassword:String,
     number:Number,
-    address:[{
-        fname:String,
-        lname:String,
-        housename:String,
-        city:String,
-        state:String,
-        pin:Number,
-        country:String
+    addresses:[{
+        building: String,
+        address: String,
+        pincode: Number,
+        country: String,
+        contactNumber: Number,
+        primary: Boolean,
     }],
     access:{
         type:Boolean,

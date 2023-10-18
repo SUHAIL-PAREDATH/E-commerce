@@ -21,9 +21,13 @@ router
 .route("/categories")
 .get(productListing.categories)
 
+
 //=================== product listing page================
 router
 .route('/products')
 .get(productListing.collection)
+.patch(productListing.filter)
+.post(productListing.sortBy)
+.put(productListing.searching)
 
 module.exports=router

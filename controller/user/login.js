@@ -20,8 +20,17 @@ module.exports={
     postLogin:async(req,res)=>{
       try {
         const inputEmail=req.body.email.toLowerCase();
+        console.log(inputEmail);
         const inputPassword=req.body.password
         const userFind=await User.findOne({email:inputEmail})
+
+        if(!userFind){
+          res.render("user/login", {
+            documentTitle: "User Sign In",
+            errorMessage: "user not found",
+          });
+        }
+
         if (userFind) {
             const hashedCheck = await bcrypt.compare(
               inputPassword,

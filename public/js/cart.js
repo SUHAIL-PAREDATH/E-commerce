@@ -90,4 +90,19 @@ function changeCount(productID, i,count) {
         },
       });
     }
-  
+    function checkOut(){
+      const stock= $('#stockCheck').val()
+       if(stock==0){
+         Swal.fire({  
+           icon: "error",     
+           showConfirmButton: false,
+           timer: 2000,
+           timerProgressBar: true,
+           animation: true,
+           title: "Cart Item is out of stockk",
+         })
+     
+       }else{
+         window.location= "/cart/checkout"
+       }
+     }
