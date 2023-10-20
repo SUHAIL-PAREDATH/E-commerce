@@ -50,3 +50,50 @@ function addToCart(productID){
       },
     });
   }
+
+  //========================= adding product to wish list ===============================
+function addToWishlist(productId) {
+  let currentURL = window.location.href;
+  $.ajax({
+    url: "/wishlist",
+    method: "patch",
+    data: {
+      id: productId,
+      url: currentURL,
+    },
+    success: (res) => {
+      if (res.data.message === 0) {
+        $("#wishlistHeart").html('<i class="fa fa-heart text-dark">');
+        Swal.fire({
+          toast: true,
+          icon: "error",
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          animation: true,
+          title: "Removed from wishlist",
+        });
+
+        $("#wish-count").load(location.href + " #wish-count");
+      } else if (res.data.message === 1) {
+        $("#wishlistHeart").html('<i class="fa fa-heart text-danger">');
+        Swal.fire({
+          toast: true,
+          icon: "success",
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          animation: true,
+          title: "Added to wishlist",
+        });
+        $("#wish-count").load(location.href + " #wish-count");
+        $("#wishlistHeart").html('<i class="fa fa-heart text-danger">');
+        location.reload()
+      } else {
+        window.location.href = "/login"
+      }
+    },
+  });
+}

@@ -59,5 +59,17 @@ app.use('/',userRouter)
 app.use('/admin',adminRouter)
 app.use('/',indexRouter)
 
+// 404 rendering
+const userModel=require("./model/user/userSchema")
+app.all('*',async(req,res)=>{
+  const currentUser=await userModel.findById(req.session.userID);
+  res.render('index/404',{
+    documentTitle:'Page Not found',
+    urlencoded:req.originalUrl,
+    session:req.session.userID,
+    currentUser
+  })
+})
+
 
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))

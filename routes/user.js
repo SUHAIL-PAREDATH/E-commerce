@@ -5,17 +5,18 @@ const login=require('../controller/user/login')
 const logOut=require('../controller/user/logOut')
 const sessionCheck=require('../middleware/user/sessionCheck')
 const cart= require('../controller/user/cart')
+const wishlist=require('../controller/user/wishlist')
 const checkout=require('../controller/user/checkout')
 
 
-// ==============LOGIN============ 
+// ================LOGIN====================== 
 
 router.
 route('/login',)
 .get(login.getLogin)
 .post(login.postLogin)
 
-// =============SIGNUP===========
+// =================SIGNUP=====================
 router.
 route('/register',)
 .get(register.getRegister)
@@ -23,18 +24,18 @@ route('/register',)
 
 
 router.get('/register/reSendOTP',register.reSendOTP)
-// =============OTP==============
+// =================OTP========================
 
 router.
 route('/otp',)
 .get(register.getOTP)
 .post(register.postOTP)
 
-// ============logOUt==============
+// =================logOUt======================
 
 router.get('/logOut',sessionCheck,logOut.logOut)
 
-// ==========cart===========
+// ================cart=========================
 
 router
 .route('/cart')
@@ -43,7 +44,16 @@ router
 .delete(sessionCheck,cart.removeProduct)
 .put(sessionCheck,cart.countChange)
 
-// ==============check OUt======================
+
+// ===============wish list======================
+router
+.route("/wishlist")
+.get(sessionCheck,wishlist.viewAll)
+.patch(wishlist.addOrRemove)
+.delete(wishlist.remove)
+
+
+// ===============check OUt======================
 
 router
 .route('/cart/checkout')

@@ -10,9 +10,23 @@ exports.view =async(req,res)=>{
         try {
           let currentUser;
           let  userCart;
+
+          // // wishlist
+          // let productExistInWishlist=null
+          // const productDetails=await productModel.findById(req.params.id).populate('brand').populate('category')
+
+
+
           if(req.session.userID){
             currentUser=await userModel.findById(req.session.userID);
             userCart=await cartModel.findOne({customer:req.session.userID})
+
+            // for wish list
+            // productExistInWishlist=await wishlistModel.findOne({
+            //   customer:currentUser._id,
+            //   products:{$in:[productDetails._id]}
+            // });
+            // productExistInWishlist=productExistInWishlist?productExistInWishlist.products:null;
           }
           const banners=await bannerModel.find({active:true}).limit(3).sort({title:1});
           const allProduct=await productModel.find({listed:true}).populate('category').populate('brand').sort({_id:-1});
@@ -42,7 +56,9 @@ exports.view =async(req,res)=>{
             men,
             women,
             banners,
-            userCart
+            userCart,
+            allProduct,
+            
             })
           
         
