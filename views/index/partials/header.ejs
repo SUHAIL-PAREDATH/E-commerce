@@ -30,8 +30,18 @@
 
 	<!-- BOOTSTRAP -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<!--===============================================================================================-->
 
+    <!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<!--===============================================================================================-->
+<style>
+    /* Increase z-index for SweetAlert */
+    .swal2-container {
+        z-index: 9999; /* Adjust this value as needed */
+    }
+
+    /* If you want to increase z-index for other elements as well, you can do it here */
+</style>
 </head>
 <body class="animsition">
 <!-- Header -->
@@ -73,8 +83,8 @@
             </div>
         </div>
 
-        <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop container">
+        <div class="wrap-menu-desktop" >
+            <nav class="limiter-menu-desktop container "style="z-index: 9999;">
                 
                 <!-- Logo desktop -->	
                     

@@ -44,7 +44,10 @@ function removeFromWishlist(id){
             timerProgressBar: true,
             animation: true,
             title: "Added to cart",
+            customClass: "custom-swal-class",
           });
+          
+
           $("#wishlist").load(location.href + " #wishlist");
         }else if(res.success === "outofstcok" ){
           Swal.fire({

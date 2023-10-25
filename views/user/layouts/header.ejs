@@ -30,7 +30,18 @@
 
 	<!-- BOOTSTRAP -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <!--===============================================================================================-->
+<style>
+    /* Increase z-index for SweetAlert */
+    .swal2-container {
+        z-index: 9999; /* Adjust this value as needed */
+    }
+
+    /* If you want to increase z-index for other elements as well, you can do it here */
+</style>
 </head>
 <body class="animsition">
 <!-- Header -->
@@ -41,7 +52,7 @@
         <div class="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
-                    Free shipping for standard order over $100
+                    <!-- Free shipping for standard order over $100 -->
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
@@ -72,8 +83,8 @@
             </div>
         </div>
 
-        <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop container">
+        <div class="wrap-menu-desktop" >
+            <nav class="limiter-menu-desktop container "style="z-index: 9999;">
                 
                 <!-- Logo desktop -->	
                     
@@ -143,13 +154,22 @@
                     </div> -->
                     <!-- ========= -->
 <!-- js class for temlate cart showing = js-show-cart-->
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti "  data-notify="<%=userCart.totalQuantity%>"</div>
-                        <a href="/cart"><i class="zmdi zmdi-shopping-cart cl2"></i></a>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+                    <h5><a class="text-decoration-none text-dark ps-5" href="/products?category=collection">COLLECTION</a></h5>
                     </div>
+                    
+                   
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti "  data-notify="<%if(session){%><%=locals.userCart.totalQuantity%><%}%>"> 
+                        
+                        <a href="/cart"><i class="zmdi zmdi-shopping-cart cl2"></i></a>
 
-                    <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                        <i class="zmdi zmdi-favorite-outline"></i>
-                    </a>
+                    </div>
+                    <div id="wish-count">
+                        <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                            <i class="zmdi zmdi-favorite-outline"></i>
+                        </a>
+                    </div>
+                    
                 </div>
             </nav>
         </div>	
@@ -167,12 +187,12 @@
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
                 <i class="zmdi zmdi-search"></i>
             </div>
-
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-                <i class="zmdi zmdi-shopping-cart"></i>
+            
+            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="">
+                <a href="/cart"><i class="zmdi zmdi-shopping-cart"></i></a>
             </div>
-
-            <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+            
+            <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="">
                 <i class="zmdi zmdi-favorite-outline"></i>
             </a>
         </div>

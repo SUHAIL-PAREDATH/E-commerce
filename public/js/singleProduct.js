@@ -90,7 +90,7 @@ function addToWishlist(productId) {
         });
         $("#wish-count").load(location.href + " #wish-count");
         $("#wishlistHeart").html('<i class="fa fa-heart text-danger">');
-        location.reload()
+        
       } else {
         window.location.href = "/login"
       }
