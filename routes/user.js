@@ -7,6 +7,7 @@ const sessionCheck=require('../middleware/user/sessionCheck')
 const cart= require('../controller/user/cart')
 const wishlist=require('../controller/user/wishlist')
 const checkout=require('../controller/user/checkout')
+const profile=require("../controller/user/profile")
 
 
 // ================LOGIN====================== 
@@ -51,6 +52,12 @@ router
 .get(sessionCheck,wishlist.viewAll)
 .patch(wishlist.addOrRemove)
 .delete(wishlist.remove)
+
+// =============profile=========================
+
+router
+.route("/profile")
+.get(profile.viewPage)
 
 
 // ===============check OUt======================

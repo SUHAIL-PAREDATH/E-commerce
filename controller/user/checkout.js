@@ -9,6 +9,8 @@ const couponModel=require('../../model/admin/coupons')
 
 exports.viewPage=async(req,res)=>{
     try {
+        const currentUser=await userModel.findById(req.session.userID)
+        console.log(currentUser.fname);
         const userCart=await cartModel.findOne({customer:req.session.userID}).populate("products.name");
         let products=userCart.products
         if(userCart.totalQuantity!=0){
@@ -32,7 +34,8 @@ exports.viewPage=async(req,res)=>{
                 userCart,
                 allAddresses,
                 coupons,
-                documentTitle:"checkout"
+                documentTitle:"checkout",
+                currentUser
                 
             })
         }else{
