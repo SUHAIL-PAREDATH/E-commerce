@@ -90,23 +90,25 @@
 //         },
 //       });
 //     }
-//     function checkOut(){
-//       const stock= $('#stockCheck').val()
-//        if(stock==0){
-//          Swal.fire({  
-//            icon: "error",     
-//            showConfirmButton: false,
-//            timer: 2000,
-//            timerProgressBar: true,
-//            animation: true,
-//            title: "Cart Item is out of stockk",
-//          })
-     
-//        }else{
-//          window.location= "/cart/checkout"
-//        }
-//      }
 
+// ==============================check out page =============
+    function checkOut(){
+      const stock= $('#stockCheck').val()
+       if(stock==0){
+         Swal.fire({  
+           icon: "error",     
+           showConfirmButton: false,
+           timer: 2000,
+           timerProgressBar: true,
+           animation: true,
+           title: "Cart Item is out of stockk",
+         })
+     
+       }else{
+         window.location= "/cart/checkout"
+       }
+     }
+// ===========================================================
 function removeFromCart(event, productID) {
   event.preventDefault();
   console.log(productID);
@@ -132,6 +134,7 @@ function removeFromCart(event, productID) {
   });
 }
 
+// =======================================================
 
 function changeCount(productID, i, count) {
   let proQty = $(`#cartCount${i}`).html();

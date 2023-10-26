@@ -8,6 +8,7 @@ const category= require('../controller/admin/category')
 const brands=require('../controller/admin/brands')
 const banners=require('../controller/admin/banner')
 const upload=require('../utilities/imageUpload')
+const coupons=require('../controller/admin/coupon')
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
@@ -110,5 +111,12 @@ router
 .delete(banners.deleteBanner)
 
 
+//===========================Coupons==============================
 
+router
+.route('/coupon')
+.get(coupons.viewPage)
+.post(coupons.addNew)
+
+router.get("/coupon/changeActivity",coupons.changeActivity)
 module.exports=router;

@@ -3,7 +3,7 @@ const mongoose=require("mongoose")
 const couponShema=new mongoose.Schema({
     name:String,
     code:String,
-    discount:Date,
+    discount:Number,
     startingDate:Date,
     qty:Number,
     expiryDate:Date,
