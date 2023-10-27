@@ -19,6 +19,10 @@ const userSchema=new mongoose.Schema({
         contactNumber: Number,
         primary: Boolean,
     }],
+    photo: {
+        type: String,
+        default: "default_userPhoto.jpg",
+      },
     access:{
         type:Boolean,
         default:true 

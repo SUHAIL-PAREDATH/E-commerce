@@ -1,5 +1,7 @@
 const express=require('express')
 const router=express.Router();
+const croppedImgupload=require('../utilities/croppedImgUpload')
+
 const register=require('../controller/user/register')
 const login=require('../controller/user/login')
 const logOut=require('../controller/user/logOut')
@@ -57,8 +59,8 @@ router
 
 router
 .route("/profile")
-.get(profile.viewPage)
-
+.get(sessionCheck,profile.viewPage)
+.post(sessionCheck,croppedImgupload.single("photo"),profile.updateUser)
 
 // ===============check OUt======================
 
