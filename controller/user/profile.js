@@ -25,8 +25,9 @@ exports.viewPage=async(req,res)=>{
 exports.updateUser=async(req,res)=>{
     try {
         const userID=req.session.userID
-        const newName=req.body.name;
-        const filteredBody={fname:newName}
+        const newName=req.body.fname;
+        const lastName=req.body.lname;
+        const filteredBody={fname:newName,lname:lastName}
         if(req.file){
             filteredBody.photo=req.file.filename;
         }

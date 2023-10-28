@@ -10,6 +10,7 @@ const cart= require('../controller/user/cart')
 const wishlist=require('../controller/user/wishlist')
 const checkout=require('../controller/user/checkout')
 const profile=require("../controller/user/profile")
+const address=require('../controller/user/address')
 
 
 // ================LOGIN====================== 
@@ -62,6 +63,11 @@ router
 .get(sessionCheck,profile.viewPage)
 .post(sessionCheck,croppedImgupload.single("photo"),profile.updateUser)
 
+// ===============addresses======================
+router.get("/addresses",address.viewPage)
+router.post('/addresses/addNew',address.addNew)
+router.get('/addresses/delete',address.deleteAddress)
+router.get("/addresses/changeRole",address.defultToggler)
 // ===============check OUt======================
 
 router
