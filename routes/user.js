@@ -73,4 +73,19 @@ router.get("/addresses/changeRole",address.defultToggler)
 router
 .route('/cart/checkout')
 .get(sessionCheck,checkout.viewPage)
+.put(sessionCheck,checkout.couponCheck)
+.post(sessionCheck,checkout.checkout)
+
+router.get("/cart/checkout/:id",checkout.result)
+
+router.post("/cart/checkout/:id",async(req,res)=>{
+    const transactionID=req.params.id;
+    console.log(transactionID)
+    res.redirect(`/cart/checkout/${transactionID}`)
+})
+
+// router.put("/cart/coupon",sessionCheck,checkout.couponCheck)
+
+router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
+// ==================================
 module.exports=router;

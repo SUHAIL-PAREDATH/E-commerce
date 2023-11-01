@@ -23,15 +23,15 @@ module.exports={
         console.log(inputEmail);
         const inputPassword=req.body.password
         const userFind=await User.findOne({email:inputEmail})
-
+console.log("asfsf");
         if(!userFind){
+          console.log("-------------");
           res.render("user/login", {
             documentTitle: "User Sign In",
             errorMessage: "user not found",
           });
-        }
-
-        if (userFind) {
+        }else{
+          if (userFind) {
             const hashedCheck = await bcrypt.compare(
               inputPassword,
               userFind.password
@@ -58,6 +58,9 @@ module.exports={
               errorMessage: "User not found",
             });
         }
+        }
+
+        
       } catch (error) {
         console.log("Error signing in user: " + error);
       }

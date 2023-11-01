@@ -8,6 +8,7 @@
 <%- include('../layouts/header') -%>
 
 	<!-- Shoping Cart -->
+	<%if(userCart!=null && userCart.products.length!=0){%>
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row" id="cart">
@@ -24,8 +25,8 @@
 									<th class="column-5"></th>
 
 								</tr>
-				<%if(userCart!=null && userCart.products.length!=0){%><%
-				userCart.products.forEach((product,i)=>{%>				
+				
+					<%userCart.products.forEach((product,i)=>{%>				
 								
 								<tr class="table_row" >
 									<td class="column-1">
@@ -78,14 +79,7 @@
 
 								</tr>
 								<%})%>
-								<%}else{%>
-									<h5 class="text-center my-4 fw-light">No products on your cart yet.</h5>
-									<div class="text-center my-4 fw-bold">
-									  <a href="/" class=" fst-italic"
-										>Continue shopping <i class="fa fa-arrow-right"></i
-									  ></a>
-									</div>
-									<%}%>%>
+							
 							</table>
 						</div>
 
@@ -227,13 +221,24 @@
 					  >Checkout</a
 					>
 						</div>
+						
 					</div>
+					
 				</div>
+				
 			
 			</div>
+			
 		</div>
 	</form>
-		
+		<%}else{%>
+				<h5 class="text-center my-4 fw-light">No products on your cart yet.</h5>
+				<div class="text-center my-4 fw-bold">
+				  <a href="/" class=" fst-italic"
+					>Continue shopping <i class="fa fa-arrow-right"></i
+				  ></a>
+				</div>
+			<%}%>%>
 	
 		
 	<%- include('../layouts/footer') -%>
