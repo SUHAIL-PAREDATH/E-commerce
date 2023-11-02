@@ -1,7 +1,5 @@
 // ============================= BANNER  ===========================
 
-const orderCLTN = require("../../../models/users/order");
-
 // banners making api call for delete and changeActivity for Banner
 //Change Activity
 function changeActivity(id, active){
@@ -27,4 +25,37 @@ function deleteBanner(id){
     },
 
   });
+}
+
+// =========================Orders details in admin side=================
+
+//orders
+function deliverOrder(id, i) {
+  $.ajax({
+    url: "/admin/orders",
+    type: "patch",
+    data: {
+      orderID: id,
+    },
+    success: (res) => {
+      if (res.data.delivered === 1) {
+        $("#deliver" + i).load(location.href + " #deliver" + i);
+      }
+    },
+  });
+}
+
+function returnOrder(id,i){
+  $.ajax({
+    url:"/admin/orders",
+    type:"put",
+    data:{
+      orderID:id,
+    },
+    success:(res)=>{
+      if(res.data.returned===1){
+        $("#deliver"+i).load(location.href+" deliver"+i);
+      }
+    }
+  })
 }

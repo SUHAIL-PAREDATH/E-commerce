@@ -9,10 +9,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>users</title>
 
     <!-- Custom fonts for this template-->
-    <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="#" rel="stylesheet" type="text/css">
+    <link href="/public/admin/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -48,72 +50,91 @@
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>images</th>
-                                                    <th>Product Name</th>
-                                                    <th>OrderId</th>
-                                                    <th>Customer Name</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <!-- <th>Category</th> -->
+                                                    <th>Order ID</th>
+                                                    <th>Customer</th>
+                                                    <th>Bill</th>
+                                                    <th>Status</th>
+                                                    <th>Order Date</th>
+                                                    <!-- <th>Bill Amount</th> -->
+                                                    <!-- <th>Category</th>
                                                     <th>Total</th>
-                                                    <th>View</th>
+                                                    <th>View</th> -->
                                                     <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <!-- <th>#</th>
                                                     <th>images</th>
                                                     <th>Product Name</th>
                                                     <th>OrderId</th>
                                                     <th>Customer Name</th>
                                                     <th>Price</th>
-                                                    <th>Quantity</th>
+                                                    <th>Quantity</th> -->
                                                     <!-- <th>Category</th> -->
-                                                    <th>Total</th>
-                                                    <th>View</th>
+                                                    <!-- <th>Total</th>
+                                                    <th>View</th> -->
                                                     <!-- <th>Action</th> -->
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                               
+                                                <% allOrders.forEach(function(item,i){ %>
                                                             <tr>
                                                                 <td>
+                                                                    <%= item._id %><br /><a
+                                                                    href="/admin/orders/<%= item._id %>"
+                                                                    class="btn btn-sm btn-dark text-white m-1"
+                                                                    >Detailed View</a
+                                                                  >
                                                                 </td>
-                                                                <td class="d-flex flex-raw">
-                                                                    <div class="d-flex flex-column">
-                                                                        <img height="10vh"  width: = '10vh'
-                                                                            src=""
-                                                                            alt=""><a href=""></a>
-                                                                    </div>
+                                                                <td>
+                                                                    <%= item.customer.name %><br /><%= item.customer.email %>
                                                                 </td>
 
                                                                 <td>
-                                                                    
+                                                                    <b>Bill:</b> <%= item.finalPrice %><br /><b>Discount Price:</b> <%=
+                                                                    item.discountPrice %><br /><b>Price:</b> <%= item.price %>
                                                                 </td>
                                                                 <td>
-                                                                   
+                                                                    <div id="deliver<%=i%>">
+                                                                        <%if(item.status === 'In-transit' && item.delivered != true){%>
+                                                                         
+                                                                            <button
+                                                                              class="btn btn-sm btn-primary w-100"
+                                                                              onclick="deliverOrder('<%=item._id%>','<%=i%>')"
+                                                                            >
+                                                                              <i class="fa fa-truck text-warning"></i><span> Deliver</span>
+                                                                            </button>
+                                                                            <%} else if(item.status === 'return-requested'){%>
+                                                            
+                                                                              <button
+                                                                              class="btn btn-sm btn-danger w-100"
+                                                                              onclick="returnOrder('<%=item._id%>','<%=i%>')"
+                                                                            >
+                                                                              <i class="fa fa-arrow-right "></i><span>Accept Return</span>
+                                                                            </button>
+                                                                          <%} else {%>
+                                                                           <span style="color: rgb(32, 138, 37);"><%=item.status%></span> 
+                                                                            <%}%>
+                                                                        </div>
                                                                 </td>
                                                                 <td>
-                                                                    
+                                                                    <%= moment(item.orderedOn).format('lll') %> <br />
                                                                 </td>
-                                                                <td>
+                                                                <!-- <td>
                                                                     
-                                                                </td>
-                                                                <td>
-                                                                    
-                                                                </td>
+                                                                </td> -->
                                                                 <!-- <td >
                                                                    
                                                                 </td> -->
-                                                                <td>
+                                                                <!-- <td>
                                                                    
                                                                 </td>
                                                                 <td>
                                                                    <a href="" role="button" class="btn btn-primary">View</a>
-                                                                </td>
+                                                                </td> -->
                                                             </tr>
+                                                            <% }) %>
                                                             <!-- Modal -->
                                                             <div class="modal fade"
                                                                 id="exampleModalCenter""
@@ -203,23 +224,25 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap core JavaScript-->
+   <script src="/public/admin/vendor/jquery/jquery.min.js"></script>
+   <script src="/public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+   <!-- Core plugin JavaScript-->
+   <script src="/public/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/admin/js/sb-admin-2.min.js"></script>
+   <!-- Custom scripts for all pages-->
+   <script src="/public/admin/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+   <!-- Page level plugins -->
+   <script src="/public/admin/vendor/datatables/jquery.dataTables.js"></script>
+   <script src="/public/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/admin/js/demo/datatables-demo.js"></script>
+   <!-- Page level custom scripts -->
+   <script src="/public/admin/js/demo/datatables-demo.js"></script>
 
+
+   <script src="/public/admin/js/admin.js"></script>
 </body>
 
 </html>

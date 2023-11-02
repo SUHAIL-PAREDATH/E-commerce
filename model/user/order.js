@@ -6,7 +6,7 @@ const orderShema=new mongoose.Schema({
         ref:'User',
     },
     totalQuantity:Number,
-    summery:[
+    summary:[
         {
             product:{
                 type:mongoose.Types.ObjectId,
@@ -19,7 +19,7 @@ const orderShema=new mongoose.Schema({
     shippingAddress:{
         building:String,
         address:String,
-        pinCode:Number,
+        pincode:Number,
         country:String,
         contactNumber:Number,
     },

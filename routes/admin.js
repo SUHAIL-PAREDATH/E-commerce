@@ -9,6 +9,7 @@ const brands=require('../controller/admin/brands')
 const banners=require('../controller/admin/banner')
 const upload=require('../utilities/imageUpload')
 const coupons=require('../controller/admin/coupon')
+const orders=require("../controller/admin/order")
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
@@ -119,4 +120,17 @@ router
 .post(coupons.addNew)
 
 router.get("/coupon/changeActivity",coupons.changeActivity)
+
+// =========================order==================================
+
+router
+.route("/orders")
+.get(orders.viewPage)
+.patch(orders.deliver)
+.put(orders.return)
+
+router
+.route("/orders/:id")
+.get(orders.detailsPage)
+
 module.exports=router;
