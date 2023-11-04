@@ -2,15 +2,18 @@ const express=require('express')
 const router=express.Router();
 const croppedImgupload=require('../utilities/croppedImgUpload')
 
+const sessionCheck=require('../middleware/user/sessionCheck')
+const objectIdCheck=require('../middleware/user/objectCheck')
+
 const register=require('../controller/user/register')
 const login=require('../controller/user/login')
 const logOut=require('../controller/user/logOut')
-const sessionCheck=require('../middleware/user/sessionCheck')
 const cart= require('../controller/user/cart')
 const wishlist=require('../controller/user/wishlist')
 const checkout=require('../controller/user/checkout')
 const profile=require("../controller/user/profile")
 const address=require('../controller/user/address')
+const order=require("../controller/user/order")
 
 
 // ================LOGIN====================== 
@@ -50,6 +53,7 @@ router
 
 
 // ===============wish list======================
+
 router
 .route("/wishlist")
 .get(sessionCheck,wishlist.viewAll)
@@ -64,10 +68,12 @@ router
 .post(sessionCheck,croppedImgupload.single("photo"),profile.updateUser)
 
 // ===============addresses======================
-router.get("/addresses",address.viewPage)
-router.post('/addresses/addNew',address.addNew)
-router.get('/addresses/delete',address.deleteAddress)
-router.get("/addresses/changeRole",address.defultToggler)
+
+router.get("/addresses",sessionCheck, address.viewPage)
+router.post('/addresses/addNew',sessionCheck, address.addNew)
+router.get('/addresses/delete',sessionCheck, address.deleteAddress)
+router.get("/addresses/changeRole",sessionCheck, address.defultToggler)
+
 // ===============check OUt======================
 
 router
@@ -84,8 +90,17 @@ router.post("/cart/checkout/:id",async(req,res)=>{
     res.redirect(`/cart/checkout/${transactionID}`)
 })
 
-// router.put("/cart/coupon",sessionCheck,checkout.couponCheck)
-
 router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
-// ==================================
+
+// ====================Order======================
+
+router
+.route("/orders")
+.get(order.viewPage)
+
+router
+.route("/orders/:id")
+.get(sessionCheck,objectIdCheck, order.details)
+.patch(sessionCheck,objectIdCheck, order.cancel)
+.put(sessionCheck,objectIdCheck, order.return)
 module.exports=router;

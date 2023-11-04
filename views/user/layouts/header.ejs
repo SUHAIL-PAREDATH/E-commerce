@@ -59,16 +59,12 @@
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         Help & FAQs
                     </a>
-                    <%if(session){%>
+                   
                         <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-2">
                             <a href="/logOut" class="flex-c-m trans-04 p-lr-25">
                                 LogOut
                             </a>
-                              <% }else{%>
-                                <a href="/login" class="flex-c-m trans-04 p-lr-25">
-                                    Login
-                                </a>
-                                <%}%>
+                             
                           </span>	
                     
 <!-- 
@@ -159,7 +155,7 @@
                     </div>
                     
                    
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti "  data-notify="<%if(session){%><%=locals.userCart.totalQuantity%><%}%>"> 
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti "  data-notify=""> 
                         
                         <a href="/cart"><i class="zmdi zmdi-shopping-cart cl2"></i></a>
 

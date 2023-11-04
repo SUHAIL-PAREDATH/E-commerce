@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Checkout</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<%- include('../layouts/header') -%>
+    <div class="container mx-auto">
+        <div class=" text-center py-4">
+          <span class="shadow-heading h5">Your Ordersc</span><hr>
+        </div>
+        <div class="row justify-content-center m-3">
+          <div class="col-lg-9 border">
+            <% if(allOrders!= null && allOrders.length !=0){%> <%
+            allOrders.forEach((order,i) => {%>
+            <div
+              class="d-flex rounded my-2 p-3"
+              style="border: 1px solid #ffffff; font-size: 0.7rem;background: linear-gradient(316deg, #ffffff 0%, #ffffff 74%);"
+            >
+              <div
+                class="prod-details d-flex flex-grow-1 flex-column justify-content-between "
+              >
+                <div
+                  class="d-flex justify-content-between mb-2"
+                  style="border-bottom: 1px solid #dbdbdb"
+                >
+                  <span class="mb-1 h6"><b><%=i+1%>.</b> Order ID: <%=order._id%></span>
+      
+                  
+                    <% if(order.status=='delivered'){%> <span class="mb-1" style="color: rgb(0, 150, 0);font-weight: bold;">Delivered</span>
+                     <%}else{%><span class="mb-1" style="color: rgb(255, 8, 0);font-weight: bold;"><%=order.status%></span>
+                    <%}%>
+                
+                </div>
+      
+                <div class="d-flex justify-content-between">
+                  <span class="mb-1">Total Quantity:</span
+                  ><span><%=order.totalQuantity%></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="mb-1" style="letter-spacing: 1px"
+                    >Mode of Payment:</span
+                  ><span> <%=order.modeOfPayment%></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="mb-1">Bill Amount: </span
+                  ><span><%=order.finalPrice%></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="mb-1">Shipping Adress:</span
+                  ><span> <%=order.shippingAddress.building%></span>
+                </div>
+      
+                <div
+                  class="d-flex justify-content-between mt-2"
+                  style="border-top: 1px solid #dbdbdb; width: 100%"
+                >
+                  <span class="mt-2">Order Date: <%=moment(order.orderedOn).format('MMMM Do YYYY, h:mm:ss a')%></span>
+                  <a
+                    href="/orders/<%=order._id%>"
+                    class="btn btn-dark btn-sm text-white mt-1"
+                    style="font-size: 0.6rem"
+                    >View Details</a
+                  >
+                </div>
+              </div>
+            </div>
+            <%})%> <%}else{%>
+            <h5 class="text-center my-4 fw-light">You have not made any orders.</h5>
+            <div class="text-center my-4 fw-bold">
+              <a href="/" class=" fst-italic"
+                >Continue shopping <i class="fa fa-arrow-right"></i
+              ></a>
+            </div>
+            <%}%>
+          </div>
+        </div>
+      </div>
+	
+		
+	
+		
+
+	<!-- Footer -->
+	<%- include('../layouts/footer') -%>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+<!--===============================================================================================-->	
+<script src="/public/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/vendor/bootstrap/js/popper.js"></script>
+	<script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/public/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/public/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="/public/js/main.js"></script>
+	<!--===============================================================================================-->
+<!-- BOOTSTRAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<!-- sweet alert cdn -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/public/js/coupon.js"></script>
+<script>
+	function offerCheck(id) {
+	$.ajax({
+	  url:"/cart/checkout/offer/"+id,
+	  method: "get",
+		success:(res)=>{
+		  $("#couponDiscount").html(res.data.discountPrice);
+		$("#inputCouponDiscount").val(res.data.discountPrice);
+		$("#finalPrice").html(res.data.finalPrice);
+		$("#inputFinalPrice").val(res.data.finalPrice);
+	   
+		}
+	})
+  
+  }
+  </script>
+
+</body>
+</html>
