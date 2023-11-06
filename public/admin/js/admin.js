@@ -54,8 +54,43 @@ function returnOrder(id,i){
     },
     success:(res)=>{
       if(res.data.returned===1){
-        $("#deliver"+i).load(location.href+" deliver"+i);
+        $("#deliver" + i).load(location.href + " #deliver" + i);
       }
     }
   })
+}
+
+function printInvoice(divName) {
+  var printContents = document.getElementById(divName).innerHTML;
+  var originalContents = document.body.innerHTML;
+
+  document.body.innerHTML = printContents;
+
+  window.print();
+
+  document.body.innerHTML = originalContents;
+}
+
+// cancel order api call
+function cancelOrder(orderId){
+  console.log("Reached");
+  $.ajax({
+    url : '/admin/orders/cancel/' + orderId,
+    method : "patch",
+    success : (res) => {
+      if(res.success.message === 'cancelled'){
+        $("#orderDetails").load(location.href + " #orderDetails");
+        Swal.fire({
+          toast: true,
+          icon: "success",
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          animation: true,
+          title: "Order cancelled",
+        });
+      }
+    },
+  });
 }

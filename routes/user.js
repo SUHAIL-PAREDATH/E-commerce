@@ -84,6 +84,7 @@ router
 
 router.get("/cart/checkout/:id",checkout.result)
 
+//call back from razor pay
 router.post("/cart/checkout/:id",async(req,res)=>{
     const transactionID=req.params.id;
     console.log(transactionID)

@@ -75,10 +75,39 @@ exports.return=async(req,res)=>{
             await productModel.updateOne({_id:ele.product},{$inc:{stock:ele.quantity}})
         });
         res.json({
-            data:{retured:1},
+            data:{returned:1},
         })
     } catch (error) {
         res.redirect("/admin/index")
         coonsole.log("erro on returning product :" + error)
+    }
+}
+
+exports.cancelOrder=async(req,res)=>{
+    try {
+        const orderDetails=await orderModel.findById(req.params.id);
+        const productIds=orderDetails.summary.map((order)=>order.product);
+        const quantity=orderDetails.summary.map((order)=>order.quantity)
+        const price=orderDetails.summary.map((order)=> order.totalPrice);
+
+        for(let i=0;i<productIds.length;i++){
+            await productModel.updateOne(
+                { _id:productIds[i]},{$inc:{stock:quantity[i]}})
+
+            await orderModel.findByIdAndUpdate(req.params.id,{
+                $set:{
+                    status:"Cancelled",
+                    delivered:false,
+
+                }
+            })
+            res.json({
+                success:{
+                    message:'cancelled'
+                }
+            })
+        }
+    } catch (error) {
+        
     }
 }

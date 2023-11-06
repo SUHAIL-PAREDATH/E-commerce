@@ -299,7 +299,6 @@ exports.couponCheck=async(req,res)=>{
             //       );
             // }
             else if(req.body.paymentMethod==="RazorPay"){
-console.log("============================================");
                 //razor pay configuration
                 const razorpay=new Razorpay({
                     key_id:process.env.RAZORPAY_KEYID,
@@ -311,10 +310,10 @@ console.log("============================================");
                 }
                 razorpay.orders.create(options,(err,order)=>{
                     order.transactionID=transactionID;
-                    order.key=process.env.key_id;
+                    order.key=process.env.RAZORPAY_KEYID;
                     res.json(order)
                 })
-
+console.log(transactionID);
             }
         } catch (error) {
             console.log("error on checkout :"+error)

@@ -82,7 +82,7 @@ exports.return=async(req,res)=>{
             if(currentDate-deliverDate<7*24*60*60*1000){
                 await orderModel.findByIdAndUpdate(req.params.id,{
                     $set:{
-                        status:'return-requedted'
+                        status:'return-requested'
                     }
                 })
 

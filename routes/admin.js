@@ -129,6 +129,8 @@ router
 .patch(orders.deliver)
 .put(orders.return)
 
+router.patch('/orders/cancel/:id',orders.cancelOrder)
+
 router
 .route("/orders/:id")
 .get(orders.detailsPage)
