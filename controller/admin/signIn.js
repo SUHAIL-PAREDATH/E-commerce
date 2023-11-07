@@ -47,14 +47,5 @@ exports.postSignIn=async(req,res)=>{
 }
 
 
-exports.viewIndex=(req,res)=>{
-    try{
-        res.render("admin/index",{
-            documentTitle:"Admin Sign in"
-        })
 
-    }catch(error){
-console.log("Error rendering admin signin Page: " + error);
-    }
-};
 

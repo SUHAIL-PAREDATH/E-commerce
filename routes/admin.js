@@ -10,6 +10,7 @@ const banners=require('../controller/admin/banner')
 const upload=require('../utilities/imageUpload')
 const coupons=require('../controller/admin/coupon')
 const orders=require("../controller/admin/order")
+const dashboard=require("../controller/admin/dashbord")
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
@@ -20,13 +21,18 @@ route('/')
 .get(signIn.getSignIn)
 .post(signIn.postSignIn),
 
-router.
-route('/index')
-.get(sessionCheck,signIn.viewIndex),
-
 // route('/signup')
 // .get(signup.view)
 // .post(signup.getSignUp)
+
+// ==========================DashBord===============================
+
+router.
+route('/index')
+.get(sessionCheck,dashboard.view)
+.put(sessionCheck,dashboard.chartDate)
+
+
 
 //========================= User Controlle =========================
 router.
