@@ -97,3 +97,33 @@ function addToWishlist(productId) {
     },
   });
 }
+
+function buyNow(productID) {
+  $.ajax({
+    url: "/cart",
+    method: "post",
+    data: {
+      id: productID,
+    },
+    success: (res) => {
+      if (res.success === "addedToCart" || res.success === "countAdded") {
+        window.location.href = "/cart";
+      }
+      else if(res.success === "outofstcok" ){
+        Swal.fire({
+          toast: true,
+          icon: "error",
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          animation: true,
+          title: "Out Of Stock",
+        });
+      }
+       else {
+        window.location.href = "/login";
+      }
+    },
+  });
+}

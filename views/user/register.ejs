@@ -44,8 +44,13 @@
                             <form class="user" method="post" action="/register" onsubmit="return submitform('event')">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="fname" type="text" class="form-control form-control-user" id="firstName"
-                                            placeholder="First Name" required>
+                                        <input name="fname"
+                                         type="text"
+                                         class="form-control form-control-user"
+                                          id="form-holder"
+                                          onkeyup="usernameValidator() "
+                                        placeholder="First Name">
+                                        <span class="text-danger rounded" id="nameInvalid" style="font-size: 0.75rem; "></span>
                                     </div>
                                     <div class="col-sm-6">
                                         <input name="lname" type="text" class="form-control form-control-user" id="lastName"
@@ -53,30 +58,74 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-user" id="email"
-                                        placeholder="Email Address" required>
+                                    <input name="email"
+                                     type="email"
+                                      class="form-control form-control-user"
+                                       id="inputMail"
+                                        placeholder="Email Address"
+                                        onkeyup="mailValidator()"
+                                        >
+                                        <span
+                                        id="mailInvalid"
+                                        class="text-danger rounded"
+                                        style="font-size: 0.75rem; text-transform: none"
+                                      ></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="password" type="password" class="form-control form-control-user"
-                                            id="userPassword" placeholder="Password" required>
+                                        <input name="password"
+                                         type="password" 
+                                         class="form-control form-control-user"
+                                         id="inputPassword" 
+                                         onkeyup="passwordValidator()"
+                                         placeholder="Password" 
+                                         >
+                                         <span
+                                         id="passwordInvalid"
+                                         class="text-danger rounded"
+                                         style="font-size: 0.75rem; text-transform: none"
+                                       ></span>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name="cpassword" type="password" class="form-control form-control-user"
-                                            id="usercPassword" placeholder="Confirm Password"  required>
+                                        <input name="cpassword" 
+                                        type="password" 
+                                        class="form-control form-control-user"
+                                        id="confirmPassword" 
+                                        onkeyup="passwordMatch()"
+                                        placeholder="Confirm Password"
+                                        >
+                                        <span
+                                        id="passwordmatch"
+                                        class="text-danger rounded"
+                                        style="font-size: 0.75rem; text-transform: none"
+                                      ></span>
+                                        
                                     </div>
                                     
                                 <hr>
                                 </div>
                                 <div class="form-group">
-                                    <input name="number" type="Number" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Number" required >
+                                    <input name="number"  
+                                    class="form-control form-control-user" 
+                                    id="inputNumber"
+                                    onkeyup="numberValidator()"
+                                    placeholder="Number"
+                                     >
+                                     <span
+                                     id="numberInvalid"
+                                     class="text-danger rounded"
+                                     style="font-size: 0.75rem; text-transform: none"
+                                   ></span>
                                 </div>
                                 <div class="text-center" id="error"></div>
                                 <p class="text-center text-danger" >
                                  
                                 </p>
-                                <input class="btn btn-dark btn-user btn-block" value="NEXT" type="submit">
+                                <input 
+                                class="btn btn-dark btn-user btn-block" 
+                                value="NEXT" 
+                                type="submit"
+                                id="submitButton">
                             </form>
                             <hr>
                             <div class="text-center">
@@ -88,40 +137,8 @@
             </div>
         </div>
     </div>
-    <script>
-        const form = document.getElementById('form')
-        const userPassword = document.getElementById('userPassword')
-        const usercPassword = document.getElementById('usercPassword')
-        const error = document.getElementById('error')
-        const number=document.getElementById('exampleInputEmail')
-        function hideErrorMessage() {
-            error.innerHTML = "";
-        }
-        function showErrorMessage(message) {
-            error.innerHTML = `<div class=" alert text-danger bg-none " role="alert">${message}</div>`
-        }
-        function submitform(e) {
-            if(userPassword.value !== usercPassword.value)
-            {
-                showErrorMessage("Password and Confirm should be Same")
-                return false;
-            }
-            if (userPassword.value.length < 8) {
-                showErrorMessage("Password must be minimum 8 characters");
-                return false;
-            } if (userPassword.value.length > 13) {
-                showErrorMessage("Password must be Lessthan 13 characters");
-                return false;
-            } 
-            if(number.value.length < 10) {
-                showErrorMessage("Number must be 10 digit")
-                return false;
-            }
-            hideErrorMessage()
-            return true;
-        }
-
-    </script>
+    <script src="/public/js/signUp.js"></script>
+ 
     <!-- Bootstrap core JavaScript-->
     <script src="public/admin/vendor/jquery/jquery.min.js"></script>
     <script src="public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -129,5 +146,8 @@
     <script src="public/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="public/admin/js/sb-admin-2.min.js"></script>
+
+    <!-- ======================= -->
+   
 </body>
 </html>

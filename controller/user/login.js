@@ -2,9 +2,13 @@
 const bcrypt=require("bcrypt")
 const User=require('../../model/user/userSchema')
 module.exports={
-    getLogin:(req,res)=>{
+    getLogin:async(req,res)=>{
         try {
-            if(req.session.userID){
+          const user=await User.findById(req.session.userID)
+          console.log(req.session.userID);
+          console.log("dd",user);
+         
+            if(req.session.userID&& user.access===true){
                 res.redirect("/")
             }else{
                 res.render("user/login",{
@@ -23,7 +27,7 @@ module.exports={
         console.log(inputEmail);
         const inputPassword=req.body.password
         const userFind=await User.findOne({email:inputEmail})
-console.log("asfsf");
+console.log(req.session.userID);
         if(!userFind){
           console.log("-------------");
           res.render("user/login", {

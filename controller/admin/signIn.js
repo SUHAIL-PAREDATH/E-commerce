@@ -3,11 +3,16 @@ const bcrypt=require("bcrypt")
 
 exports.getSignIn=(req,res)=>{
     try{
+        if(req.session.admin){
+            res.redirect("/admin/index") 
+     }else{
         res.render("admin/login",{
             documentTitle:"Admin Sign in",
             admin : true,
             signIn : false,
         })
+     }
+       
 
     }catch(error){
 console.log("Error rendering admin signin Page: " + error);

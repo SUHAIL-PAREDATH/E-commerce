@@ -2,6 +2,7 @@ const express=require('express');
 const { get } = require('mongoose');
 const router=express.Router();
 const signIn=require("../controller/admin/signIn")
+const singOut=require("../controller/admin/logOut")
 const userControlle=require("../controller/admin/users")
 const product=require('../controller/admin/product')
 const category= require('../controller/admin/category')
@@ -14,12 +15,17 @@ const dashboard=require("../controller/admin/dashbord")
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
+
 //========================== SIGN IN ===============================
 
 router.
 route('/')
 .get(signIn.getSignIn)
 .post(signIn.postSignIn),
+
+router
+.route('/signout')
+.get(sessionCheck,singOut.logOut)
 
 // route('/signup')
 // .get(signup.view)
