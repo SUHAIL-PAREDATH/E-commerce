@@ -3,7 +3,7 @@ const bcrypt=require("bcrypt")
 
 exports.getSignIn=(req,res)=>{
     try{
-        if(req.session){
+        if(req.session.Admin){
             res.redirect("/") 
      }else{
         res.render("admin/login",{
