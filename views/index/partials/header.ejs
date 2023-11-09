@@ -176,54 +176,97 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
                     <h5><a class="text-decoration-none text-dark ps-5" href="/products?category=collection">COLLECTION</a></h5>
                     </div>
+                    <%if(session){%>
                     
-                   
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti "  data-notify="<%if(session){%><%=locals.userCart.totalQuantity%><%}%>"> 
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti " data-notify="<%=locals.userCart.totalQuantity%>"id="cartCount" > 
                         
                         <a href="/cart"><i class="zmdi zmdi-shopping-cart cl2"></i></a>
 
                     </div>
                     <div id="wish-count">
-                        <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+                        <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" >
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
                     </div>
                     
-                    <div >
-                        <ul class="navbar-nav ml-auto">
-
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
                     
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                    <img class="img-profile rounded-circle" src="/public/admin/img/undraw_profile.svg">
-                                    
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="userDropdown">
-                                    
-                                    <!-- <div class="dropdown-divider"></div> -->
-                                    <a class="dropdown-item" href="/profile"
-                                        >
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="/logOut" data-toggle="modal"
-                                        data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
+                    
+                    <% }else{%>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+                            <h5><a class="text-decoration-none text-dark " href="/login">SIGN-IN</a></h5>
+                            </div>
+                            <%}%>
+                            <span class="nav-item nav-link text-center mb-2 mb-lg-0 ms-lg-3 ">
+                                <% if(session){%>
+                                <div class="d-block d-lg-none">
+                                  <hr />
+                                  <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+                                    <a class="nav-link fw-bold " href="/users/profile"
+                                      ><img
+                                        src="/Public/img/users/<%=locals.currentUser.photo%>"
+                                        height="25px"
+                                        alt=""
+                                        class="mx-2"
+                                      /><%=locals.currentUser.name%></a
+                                    >
+                                  </span>
+                                  <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
+                                    <a
+                                      class="nav-link"
+                                      style="font-size: 0.85rem"
+                                      href="/users/signOut"
+                                      >Sign out</a
+                                    >
+                                  </span>
                                 </div>
-                            </li>
-                    
-                        </ul>
-                    </div>
-
+                                <div class="btn-group dropstart d-none d-lg-block">
+                                  <button
+                                    type="button"
+                                    class="btn dropdown-toggle button-div border"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    style="
+                                      text-transform: uppercase;
+                                      letter-spacing: 2px;
+                                      color: rgb(0, 0, 0);
+                                      font-weight: 600;
+                                      border: black;
+                        
+                                    "
+                                  >
+                                    <img
+                                      src="/Public/img/users/<%=locals.currentUser.photo%>"
+                                      height="25px"
+                                      alt=""
+                                      style="border-radius: 20px;"
+                                    />
+                                  </button>
+                                  <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #ffffff;">
+                                    <li
+                                      class="dropdown-item border-bottom"
+                                      style="pointer-events: none;color: rgb(20, 141, 247);"
+                                    >
+                                      <%=locals.currentUser.name%>
+                                    </li>
+                                    <li >
+                                      <a class="dropdown-item" id="icon-item" href="/profile">Profile</a>
+                                    </li>
+                                    <li>
+                                      <a class="dropdown-item" id="icon-item" href="/orders">Orders</a>
+                                    </li>
+                                    <li class="border-bottom">
+                                      <a class="dropdown-item" id="icon-item" href="/addresses">Address</a>
+                                    </li>
+                                    <li>
+                                      <a class="dropdown-item" id="icon-item" href="/signOut">Sign Out</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                  
+                                <% }else{%>
+                                <!-- <a class="nav-link" href="/regi">Sign In</a> -->
+                                <%}%>
+                              </span>
 
                     
                     
