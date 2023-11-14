@@ -19,15 +19,14 @@ exports.viewCart=async(req,res)=>{
 
 exports.addToCart=async(req,res)=>{
     try {
-
+        const id=req.body.id
         const product=await productModel.findOne({_id:req.body.id});
-        const userCart=await cartModel.findOne({customer:req.session.userID})
-       
-console.log(userCart._id);
+        const userCart=await cartModel.findOne({customer:req.session.userID});
         const prodExist=await cartModel.findOne({
             _id:userCart._id,
             products:{$elemMatch:{name:new mongoose.Types.ObjectId(req.body.id)}}
         });
+console.log(userCart.products.id.quantity);
         if(product.stock===0){
             res.json({
                 success:"outofstock",
@@ -35,6 +34,7 @@ console.log(userCart._id);
             });
         }
         else if(prodExist){
+
             await cartModel.updateOne({
                 _id:userCart._id,
                 products:{$elemMatch:{name:req.body.id}}

@@ -3,8 +3,8 @@ const categoryModel=require('../../model/admin/category')
 const userModel=require('../../model/user/userSchema')
 const cartModel=require('../../model/user/cart')
 const wishlistModel = require('../../model/user/wishlist')
-
-
+const reviewModel=require('../../model/user/reviews')
+const moment=require('moment')
 exports.view=async(req,res)=>{
     try {
         const currentUser=await userModel.findById(req.session.userID);
@@ -13,6 +13,10 @@ exports.view=async(req,res)=>{
         const categoryId=productDetails.category._id;
 
         let productExistInWishlist=null
+        let percentageOffer=null;
+        if(productDetails.initialPrice){
+            percentageOffer=Math.ceil((productDetails.initialPrice-productDetails.price)*100/productDetails.initialPrice);
+        }
         if(currentUser){
             productExistInWishlist=await wishlistModel.findOne({
                 customer:currentUser._id,
@@ -20,7 +24,19 @@ exports.view=async(req,res)=>{
             });
         productExistInWishlist=productExistInWishlist?productExistInWishlist.products:null;
         }
-        console.log(productDetails.userCart+"=====================");
+        let reviews=await reviewModel.find({product:productDetails._id})
+        .sort({
+            createdAt:-1
+        })
+        .populate({
+            path:'customer',
+            select:"fname photo",
+        });
+        const numberOfReviews=reviews.length;
+        reviews=reviews.slice(0,6);
+        if(reviews==""){
+            reviews=null;
+        }
         const similarProduct=await productModel.find({}).sort({_id:1}).limit(8)
         res.render('index/product',{
             documentTitle: productDetails.name,
@@ -29,7 +45,11 @@ exports.view=async(req,res)=>{
             currentUser,
             listing:similarProduct,
             userCart,
-            productExistInWishlist
+            productExistInWishlist,
+            moment,
+            percentageOffer,
+            reviews,
+            numberOfReviews
             
             })
     } catch (error) {

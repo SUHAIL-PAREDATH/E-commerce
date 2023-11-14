@@ -204,11 +204,23 @@
                                       class="form-control"
                                       id="Price"
                                       placeholder="Price"
-                                      name="price"
-                                      value="<%= product.price %>"
+                                      name="initialPrice"
+                                      value="<%= product.initialPrice %>"
                                       required
                                     />
                                   </div>
+                                  <div class="mb-3 col-lg-6">
+                                    <label for="Price" class="px-1" style="font-size: 0.75rem;">Price</label>  
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          id="Price"
+                                          placeholder="offer Price"
+                                          name="price"
+                                          value="<%= product.price %>"
+                                          required
+                                        />
+                                      </div>
                                   <div class="mb-3 col-lg-6">
                                 <label for="stock" class="px-1" style="font-size: 0.75rem;">Stock</label>  
                                     <input

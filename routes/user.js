@@ -14,7 +14,8 @@ const checkout=require('../controller/user/checkout')
 const profile=require("../controller/user/profile")
 const address=require('../controller/user/address')
 const order=require("../controller/user/order")
-
+const review=require('../controller/user/review')
+const forgetPassword=require('../controller/user/forgotPassword')
 
 // ================LOGIN====================== 
 
@@ -41,6 +42,12 @@ route('/otp',)
 // =================logOUt======================
 
 router.get('/logOut',sessionCheck,logOut.logOut)
+
+// ================forgetPassword===============
+
+router
+.route("/forgetPassword")
+.get(forgetPassword.viewPage)
 
 // ================cart=========================
 
@@ -104,4 +111,12 @@ router
 .get(sessionCheck,objectIdCheck, order.details)
 .patch(sessionCheck,objectIdCheck, order.cancel)
 .put(sessionCheck,objectIdCheck, order.return)
+
+// ====================review=====================
+
+router
+.route("/reviews")
+.post(review.addNew)
+.patch(review.helpful)
+
 module.exports=router;

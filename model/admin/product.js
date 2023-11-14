@@ -17,6 +17,7 @@ const productShema=new mongoose.Schema({
         ref:'brands',
         require:true
     },
+    initialPrice:Number,
     price:{
         type:Number,
         require

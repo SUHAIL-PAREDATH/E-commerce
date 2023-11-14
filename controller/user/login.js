@@ -5,8 +5,6 @@ module.exports={
     getLogin:async(req,res)=>{
         try {
           const user=await User.findById(req.session.userID)
-          console.log(req.session.userID);
-          console.log("dd",user);
          
             if(req.session.userID&& user.access===true){
                 res.redirect("/")
