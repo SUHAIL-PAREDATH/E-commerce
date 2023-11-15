@@ -48,7 +48,14 @@ router.get('/logOut',sessionCheck,logOut.logOut)
 router
 .route("/forgetPassword")
 .get(forgetPassword.viewPage)
+.post(forgetPassword.emailVerification,forgetPassword.otpSend)
 
+router.get("/otpVerification",forgetPassword.otpPage)
+router.post("/otpVerification",forgetPassword.otpVerification)
+
+
+router.get("/changePassword",forgetPassword.passwordChangePage)
+router.post("/changePassword",forgetPassword.updatePassword)
 // ================cart=========================
 
 router

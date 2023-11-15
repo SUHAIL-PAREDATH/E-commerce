@@ -60,7 +60,7 @@ module.exports = {
             await newOTP.save()
             
             //Transporter
-            const transporter = await nodemailer.createTransport({
+            const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
                   user: process.env.TRANSPORTER_USERNAME,
@@ -69,10 +69,10 @@ module.exports = {
               });
 
               //Mail options
-              const mailOptions=await{
+              const mailOptions={
                 from: process.env.TRANSPORTER_USERNAME,
                  to: inputEmail,
-                 subject: "OTP Verification ",
+                 subject: "OTP Verification || TICK TICK ",
                 html: `<h1>OTP</h1></br><h2 style="text-color: red, font-weight: bold">${tempOTP}</h2></br><p>Enter the OTP to create account.</p>`,
               };
               //send mail
@@ -165,7 +165,7 @@ module.exports = {
                   let mailOptions = {
                         from:process.env.TRANSPORTER_USERNAME,
                         to: inputEmail,
-                        subject : "OTP Verification | LAP4YOU eCommerce",
+                        subject : "OTP Verification | TICK TICK",
                         html: `<h1>OTP</h1></br><h2 style="text-color: red, font-weight: bold">${otp}</h2></br><p>Enter the OTP to create account.</p>`,
                   };
 
