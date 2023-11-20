@@ -12,6 +12,7 @@ const upload=require('../utilities/imageUpload')
 const coupons=require('../controller/admin/coupon')
 const orders=require("../controller/admin/order")
 const dashboard=require("../controller/admin/dashbord")
+const salesReport=require("../controller/admin/salesReport")
 // const signup=require("../controller/admin/signup")
 const sessionCheck=require("../middleware/admin/sessionCheck")
 
@@ -38,6 +39,12 @@ route('/index')
 .get(sessionCheck,dashboard.view)
 .put(sessionCheck,dashboard.chartDate)
 
+router.get("/chart/:id",dashboard.customChartData)
+
+//sales Report
+router
+.route("/salesReport")
+.post(sessionCheck,salesReport.download)
 
 
 //========================= User Controlle =========================
@@ -68,24 +75,24 @@ router
 
 router
 .route("/brands")
-.get(brands.view)
-.post(brands.addBrand)
+.get(sessionCheck,brands.view)
+.post(sessionCheck,brands.addBrand)
 
 // edit brand name 
 router
 .route('/brands/edit')
-.get(brands.editBrandPage)
-.post(brands.editBrand)
+.get(sessionCheck,brands.editBrandPage)
+.post(sessionCheck,brands.editBrand)
 
 // delete brand
 router
 .route('/brands/delete')
-.get(brands.deleteBrand)
+.get(sessionCheck,brands.deleteBrand)
 //========================== Product  ==============================
 
 router
 .route('/products')
-.get(product.view)
+.get(sessionCheck,product.view)
 
 // add product
 
@@ -96,40 +103,40 @@ router
     {name:"thumbnail",maxCount:1},
     {name:"images",maxCount:3}
 ])
-    ,product.addProduct)
+    ,sessionCheck,product.addProduct)
 
 // edit product
 router
 .route('/products/edit_product')
-.get(product.editProductPage)
+.get(sessionCheck, product.editProductPage)
 .post(upload.fields([
     {name:"frontImage",maxCount:1},
     {name:"thumbnail",maxCount:1},
     {name:"images",maxCount:3}
 ]),
-    product.editProduct)
+    sessionCheck, product.editProduct)
 
 // unlist product
 router
 .route("/products/changeListing")
-.get(product.changeListing)
+.get(sessionCheck, product.changeListing)
 
 //==========================Banners ==============================
 
 router
 .route('/banner')
-.get(banners.bannerPage)
-.post(upload.single('bannerImage'),banners.addBanner)
-.patch(banners.changeActivity)
-.delete(banners.deleteBanner)
+.get(sessionCheck, banners.bannerPage)
+.post(upload.single('bannerImage'),sessionCheck, banners.addBanner)
+.patch(sessionCheck, banners.changeActivity)
+.delete(sessionCheck, banners.deleteBanner)
 
 
 //===========================Coupons==============================
 
 router
 .route('/coupon')
-.get(coupons.viewPage)
-.post(coupons.addNew)
+.get(sessionCheck, coupons.viewPage)
+.post(sessionCheck, coupons.addNew)
 
 router.get("/coupon/changeActivity",coupons.changeActivity)
 
@@ -137,14 +144,14 @@ router.get("/coupon/changeActivity",coupons.changeActivity)
 
 router
 .route("/orders")
-.get(orders.viewPage)
-.patch(orders.deliver)
-.put(orders.return)
+.get(sessionCheck, orders.viewPage)
+.patch(sessionCheck, orders.deliver)
+.put(sessionCheck, orders.return)
 
 router.patch('/orders/cancel/:id',orders.cancelOrder)
 
 router
 .route("/orders/:id")
-.get(orders.detailsPage)
+.get(sessionCheck, orders.detailsPage)
 
 module.exports=router;

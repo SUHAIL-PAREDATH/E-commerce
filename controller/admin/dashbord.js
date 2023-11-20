@@ -120,3 +120,108 @@ exports.chartDate=async(req,res)=>{
         console.log("error on getting chart data : " + error)
     }
 }
+
+exports.customChartData=async(req,res)=>{
+    try {
+        const period=req.params.id
+        console.log(period);
+        if(period=='lastmonth'){
+            let delivered=await orderModel.aggregate([{
+                $match:{$and:[{delivered:true},{orderedOn:{$gte:new Date().getTime()-(30*24*60*60*1000)}}]}
+            }]);
+                delivered=delivered.length;
+            let returned=await orderModel.aggregate([{
+                $match:{$and:[{status: "returned" },{returnedOn:{$gte : new Date(new Date().getTime()-(30*24*60*60*1000))}}]}
+            }])
+            returned=returned.length;
+            
+            let notDelivered=await orderModel.aggregate([
+                { $match: {$and:[{delivered:false},{orderedOn:{$gte : new Date(new Date().getTime()-(30*24*60*60*1000))}}]} },
+                {
+                    $group:{
+                        _id:"$status",
+                        status:{$sum:1}
+                    }
+                }
+            ]);
+            let inTransit;
+            let cancelled;
+            notDelivered.forEach(order=>{
+                if(order._id==="n-transit"){
+                    inTransit=order.status
+                }else if(order._id==="Cancelled"){
+                    cancelled=order.status
+                }
+            });
+            res.json({
+                data:{inTransit,cancelled,delivered,returned}
+            })
+        }
+        else if(period=="lastweek"){
+            let delivered=await orderModel.aggregate([{
+                $match:{$and:[{delivered:true},{orderedOn:{$gte: new Date().getTime()-(6*24*60*60*1000)}}]}       
+            }]);
+                delivered=delivered.length;
+            let returned=await orderModel.aggregate([{
+                $match:{$and:[{status: "returned" },{returnedOn:{$gte : new Date(new Date().getTime()-(6*24*60*60*1000))}}]} 
+            }]);
+            returned=returned.length;
+
+            let notDelivered=await orderModel.aggregate([
+                { $match: {$and:[{delivered:false},{orderedOn:{$gte : new Date(new Date().getTime()-(6*24*60*60*1000))}}]} },
+                {
+                    $group: {
+                        _id: "$status",
+                        status: { $sum: 1 }
+                    }
+                }
+            ]);
+            let inTransit;
+            let cancelled;
+            notDelivered.forEach(order => {
+                if (order._id === "In-transit") {
+                    inTransit = order.status
+                } else if (order._id === "Cancelled") {
+                    cancelled = order.status
+                }
+            });
+            res.json({
+                data: {inTransit, cancelled, delivered, returned }
+            })
+        }
+        else if(period=='last3month'){
+            let delivered=await orderModel.aggregate([{
+                $match:{$and:[{delivered:true},{orderedOn:{$gte : new Date(new Date().getTime()-(90*24*60*60*1000))}}]}
+            }]);
+                delivered=delivered.length;
+                let returned= await orderModel.aggregate([{
+                    $match:{$and:[{status: "returned" },{returnedOn:{$gte : new Date(new Date().getTime()-(90*24*60*60*1000))}}]}
+                }]);
+                 returned=returned.length;
+        
+                let notDelivered = await orderModel.aggregate([
+                    { $match: {$and:[{delivered:false},{orderedOn:{$gte : new Date(new Date().getTime()-(90*24*60*60*1000))}}]} },
+                    {
+                        $group: {
+                            _id: "$status",
+                            status: { $sum: 1 }
+                        }
+                    }
+                ]);
+                let inTransit;
+                let cancelled;
+                notDelivered.forEach(order => {
+                    if (order._id === "In-transit") {
+                        inTransit = order.status
+                    } else if (order._id === "Cancelled") {
+                        cancelled = order.status
+                    }
+                });
+                res.json({
+                    data: {inTransit, cancelled, delivered, returned }
+                })
+        }
+    } catch (error) {
+        console.log("error on getting custom cahrt data"+error)
+    }
+}
