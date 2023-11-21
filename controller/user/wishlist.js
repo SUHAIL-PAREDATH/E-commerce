@@ -35,6 +35,7 @@ exports.viewAll=async(req,res)=>{
 exports.addOrRemove=async(req,res)=>{
     try {
         const userWishlist=await wishlistModel.findOne({customer:req.session.userID});
+        console.log(userWishlist);
         if(userWishlist){
             const productExist=await wishlistModel.findOne(
                 {_id:userWishlist._id,products:req.body.id});
@@ -49,6 +50,7 @@ exports.addOrRemove=async(req,res)=>{
                         message:1
                     }
                 });
+                console.log("====================================");
             }else{
                 req.session.wishlistCount=req.session.wishlistCount -1;
                 await wishlistModel.findByIdAndUpdate(userWishlist._id,{

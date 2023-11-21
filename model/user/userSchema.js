@@ -33,7 +33,7 @@ const userSchema=new mongoose.Schema({
       },
     wishlist:{
         type:mongoose.Types.ObjectId,
-        ref:"Wishlist",
+        ref:"Whishlist",
     },
     orders:[{
         type:mongoose.Types.ObjectId,

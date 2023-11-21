@@ -3,6 +3,7 @@ const productModel=require('../../model/admin/product')
 
 exports.addNew=async(req,res)=>{
     try {
+        console.log(req.query);
         req.body.customer=req.session.userID
         req.body.product=req.query.productID
         console.log(req.body);

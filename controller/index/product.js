@@ -37,7 +37,7 @@ exports.view=async(req,res)=>{
         if(reviews==""){
             reviews=null;
         }
-        const similarProduct=await productModel.find({}).sort({_id:1}).limit(8)
+        const similarProduct=await productModel.find({}).sort({_id:1}).limit(8).populate("brand")
         res.render('index/product',{
             documentTitle: productDetails.name,
             session:req.session.userID,

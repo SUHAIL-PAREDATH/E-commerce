@@ -586,15 +586,15 @@
 
 						<!-- - -->
 						<div class="tab-pane fade " id="reviews" role="tabpanel">
-							<!-- <div class="row"> -->
-								<!-- <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto"> -->
-									<!-- <div class="p-b-30 m-lr-15-sm"> -->
+							<!-- <div class="row">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+									<div class="p-b-30 m-lr-15-sm"> -->
 										
 										<!-- ==================== -->
 								<!-- Review Carousel -->
 								<!-- Review Carousel -->
 <%if(reviews!=null){%>
-		<div class="container d-flex justify-content-center">
+		<div class="container d-flex justify-content-center" id="reviewContainer">
 		  <div class="row carousal-row">
 			  <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
 				  <div class="carousel-inner">
@@ -718,13 +718,13 @@
 		</div>
 	<%}%>
 	  <%if(session){%>
-		<button class=" btn btn-sm btn-dark mb-3 col-lg-2 mb-4" id="addReview" onclick="reviewAdd()">Add a review</button>
+		<button class=" btn btn-sm btn-dark mb-3 col-lg-2 mb-4" id="addReview" onclick="reviewAdd('<%=productDetails._id%>')">Add a review</button>
 	  <%}%> 
 																	<!-- ================ -->
 
-								<!-- </div> -->
-							<!-- </div> -->
-						<!-- </div> -->
+								<!-- </div>
+							</div>
+						</div> -->
 
 					</div>
 					
@@ -755,7 +755,7 @@
 					<% listing.forEach((product,i)=>{%>
 					<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 						<!-- Block2 -->
-						<div class="block2">
+						<div class="block2 border shadow p-2 ">
 							<div class="block2-pic hov-img0">
 								<img src="/public/img/products/<%=product.thumbnail%>" >
 
@@ -766,9 +766,9 @@
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="mtext-107 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<span class="mtext-107 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										<%=product.brand.name%>
-									</a>
+									</span>
 	
 									<h5>
 										<%=product.name%>

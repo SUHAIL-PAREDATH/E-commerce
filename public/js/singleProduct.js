@@ -172,7 +172,7 @@ function reviewAdd(productId) {
         method: "post",
         data: $("#reviewForm").serialize(),
         success: (res) => {
-          $("section").load(location.href + " section");
+          $("#reviewContainer").load(location.href + " #reviewContainer");
           $("#addReview").hide();
         },
       });
