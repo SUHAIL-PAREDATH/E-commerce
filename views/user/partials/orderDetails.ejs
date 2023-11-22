@@ -123,9 +123,10 @@
         <%if(currentOrder.status == 'delivered'){%> <button style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2.5px;" class="col-3 btn btn-danger d-flex align-items-center justify-content-center px-2 mb-3 text-white"
         onclick="returnOrder('<%=currentOrder._id%>')">Return Order</button
         > <% }%>
+        <%if(currentOrder.status =='delivered'){%>
           <button style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2.5px;" class="col-3 btn btn-dark d-flex align-items-center justify-content-center px-2 mb-3 text-white"
             onclick="printInvoice('invoice')"><i class="fa fa-download"></i>Download Invoice</button
-          > 
+          > <% }%>
         </div>
         </div>
         <%}%>

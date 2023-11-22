@@ -4,7 +4,7 @@ const brandModel=require('../../model/admin/brands')
 exports.view=async(req,res)=>{
     try {
         const brandDetails= await brandModel.find({isDeleted:false})
-        res.render("admin/brands",{
+        res.render("admin/brand",{
             session: req.session.admin,
                   documentTitle : 'Category Management | ',
                   details : brandDetails,

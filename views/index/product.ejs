@@ -175,7 +175,7 @@
                     </div>
 				</div>
 					
-                    <div id="wish-count">
+                    <div >
                         <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" >
                             <i class="zmdi zmdi-favorite-outline"></i>
                         </a>
@@ -368,6 +368,15 @@
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
+								<div class="item-slick3" data-thumb="/public/img/products/<%=productDetails.thumbnail%>" >
+									<div class="wrap-pic-w" style="display: flex;justify-content: center;">
+										<img src="/public/img/products/<%=productDetails.thumbnail%>" alt="IMG-PRODUCT" id="image" class="zoom" alt="IMG-PRODUCT" data-magnify-src="/public/img/products/<%=productDetails.thumbnail%>">
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/public/img/products/<%=productDetails.images[0]%>"">
+											<i class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
 								<div class="item-slick3" data-thumb="/public/img/products/<%=productDetails.images[0]%>" >
 									<div class="wrap-pic-w" style="display: flex;justify-content: center;">
 										<img src="/public/img/products/<%=productDetails.images[0]%>" alt="IMG-PRODUCT" id="image" class="zoom" alt="IMG-PRODUCT" data-magnify-src="/public/img/products/<%=productDetails.images[0]%>">

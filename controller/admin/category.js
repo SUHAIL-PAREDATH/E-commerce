@@ -3,7 +3,7 @@ const categoryModel = require("../../model/admin/category");
 exports.view=async(req,res)=>{
     try {
         const categoryDetails=await categoryModel.find({isDeleted:false});
-        res.render("admin/category",{
+        res.render("admin/categorys",{
             session:req.body.admin,
             documentTitle : 'Category Management ',
             details : categoryDetails,

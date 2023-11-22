@@ -1,8 +1,12 @@
 const mongoose=require("mongoose")
 
 const couponShema=new mongoose.Schema({
-    name:String,
-    code:String,
+    name:{type:String,
+        unique:true
+    },
+    code:{type:String,
+        unique:true
+    },
     discount:Number,
     startingDate:Date,
     qty:Number,

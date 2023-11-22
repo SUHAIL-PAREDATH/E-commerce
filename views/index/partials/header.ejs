@@ -175,7 +175,7 @@
                                     <a
                                       class="nav-link"
                                       style="font-size: 0.85rem"
-                                      href="/users/signOut"
+                                      href="/logOut"
                                       >Sign out</a
                                     >
                                   </span>
@@ -273,6 +273,10 @@
         <ul class="main-menu-m bg-black">
 
             <li>
+                <a href="/profile">PROFILE</a>
+            </li>
+
+            <li>
                 <a href="/categories?category=men">MEN</a>
             </li>
 
@@ -287,14 +291,7 @@
             <li>
                 <a class="" href="/products?category=collection">OUR COLLECTION</a>
             </li>
-            <!-- <li>
-                <a href="about.html">ABOUT</a>
-            </li>
 
-            <li>
-                <a href="contact.html">CONTACT</a>
-
-            </li> -->
             <%if(session){%>
             <li>
                 <a href="/logOut">SIGN-OUT</a>

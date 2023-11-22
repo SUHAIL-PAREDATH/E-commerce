@@ -398,3 +398,39 @@ console.log(transactionID);
             console.log("error on rendering success page :" +error)
         }
     }
+exports.offer=async(req,res)=>{
+  try {
+    const id=req.params.id;
+    const userCart=await cartModel.findOne({
+      customer:req.session.userID
+    })
+    const cartPrice=userCart.totalPrice;
+
+    const offer=await couponModel.findById(id);
+    if(offer){
+
+      discountPercentage=offer.discount;
+      discountPrice=(discountPercentage/100)*cartPrice;
+      discountPrice=Math.floor(discountPrice)
+      finalPrice=cartPrice-discountPrice;
+
+    res.json({
+      data:{
+        discountPrice,
+        discountPercentage,
+        finalPrice
+      }
+    })
+    }else{
+      res.json({
+        data:{
+          discountPrice:0,
+          discountPercentage:0,
+          finalPrice:userCart.totalPrice,
+        }
+      });
+    }
+  } catch (error) {
+    console.log("eeror on chekcing offer :"+error)
+  }
+}
