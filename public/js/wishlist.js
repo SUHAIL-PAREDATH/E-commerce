@@ -48,7 +48,6 @@ function removeFromWishlist(id){
           });
           
 
-          $("#wishlist").load(location.href + " #wishlist");
         }else if(res.success === "outofstcok" ){
           Swal.fire({
             toast: true,

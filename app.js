@@ -29,7 +29,7 @@ app.use(nocache());
 
 const userRouter=require('./routes/user')
 const adminRouter=require('./routes/admin')
-const indexRouter=require('./routes/index')
+const indexRouter=require('./routes/index') 
  
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine',"ejs")

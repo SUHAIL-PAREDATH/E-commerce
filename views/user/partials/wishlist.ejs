@@ -4,73 +4,74 @@
 	<title><%=locals.documentTitle%></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-oCEkTz11BWiKZl81bEY7fzsY+1EmrZbOWAH5Qx5V3h3EIp/1KMabInC+J1ebC1N" crossorigin="anonymous">
+
+
 <!--===============================================================================================-->	
 <%- include('../layouts/header') -%>
 
 	<!-- Shoping Cart -->
 	<div class="container mx-auto">
 		<div class=" text-center py-4">
-		  <span class="shadow-heading">Your Wishlist</span>
+			<span
+			class="font-weight-bold d-none d-lg-block text-uppercase"
+			style="font-size: 1.25rem"
+			>YOUR WISHLIST</span
+		  >
 		</div>
-		<div class="row justify-content-center m-3" id="wishlist">
-		  <div class="col-lg-8">
+		<!-- ============================================== -->
+		<div class="row isotope-grid">
 			<% if(userWishlist!= null && userWishlist.products.length !=0){%> <%
-			userWishlist.products.forEach((product) => {%>
-			  
-			<div class="row rounded my-2 p-3" style="border: 1px solid #312b2b;background: linear-gradient(316deg, #ffffff 0%, #ffffff 74%) !important;">
-			  <div class="prod-img text-center col-lg-5">
-				<img
-				  src="/public/img/products/<%=product.thumbnail%>" 
-				  alt=""
-				  height="150px"
-				/>
-			  </div>
-			  <div
-				class="col-lg-7 prod-details d-flex flex-grow-1 flex-column justify-content-between"
-			  >
-				<h5>
-				  <a href="/products/<%=product._id%>" style="color: rgb(255, 255, 255) !important"
-					><%=product.name%></a
-				  >
-				</h5>
-				<h6><%=product.brand.name%></h6>
-				<span style="font-size: 0.85rem"> Price: <%=product.price%></span>
-				<div class="d-flex justify-content-end mt-2">
-				  <button
-					onclick="addToCartFromWishlist('<%=product._id%>')"
-					class="btn btn-sm  mx-2 button-div"
-					style="background-color: #f4f4f4 !important"
-				  >
-					<span style="letter-spacing: 1px; font-size: 0.75rem;"
-					  >Add to cart</span
-					>
-				  </button>
-				  <button
-					class="btn btn-sm button-div"
-					style="background-color: #d1d1d1 !important"
-					onclick="removeFromWishlist('<%=product._id%>')"
-				  >
-					<span style="letter-spacing: 1px; font-size: 0.75rem"
-					  >Remove</span
-					>
-				  </button>
+				userWishlist.products.forEach((product) => {%>
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women "  id="wishlist">
+				<!-- Block2 -->
+				<div class="block2 border shadow p-2 " style="width: 80%; margin: auto; " >
+					<div class="block2-pic hov-img0" style="width: 80%; margin: auto;">
+						<a href="/products/<%=product._id%>">
+						<img src="/public/img/products/<%=product.thumbnail%>" alt="IMG-PRODUCT">
+					</a>
+						<!-- <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+							Quick View
+						</a> -->
+						<!-- <a href="/products/<%=product._id%>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+							Quick View
+						</a> -->
+					</div>
+
+					<div class="block2-txt flex-w flex-t p-t-14 ">
+						<div class="block2-txt-child1 flex-col-l ">
+							<a href="product-detail.html" class="stext-105 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<%=product.brand.name%>
+							</a>
+							<h5>
+								<%=product.name%>
+							</h5>
+							<span class="stext-105 cl3">
+								<%=product.category.name%>
+							</span>
+
+							<span class="stext-105 cl3">
+								$<%=product.price%>
+							</span>
+						</div>
+						<div>
+							<div >
+							<button onclick="addToCartFromWishlist('<%=product._id%>')" style="color: black ;font-size: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></i></button>
+							</div>
+							<div class="mt-2"style="justify-content: center;">
+							<button onclick="removeFromWishlist('<%=product._id%>')"  style="color: black ;font-size: 20px;"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+							</div>
+						</div>
+
+					</div>
 				</div>
-			  </div>
 			</div>
-			<%})%> <%}else{%>
-			<h5 class="text-center my-4 fw-light">
-			  No products on your wishlist yet.
-			</h5>
-			<div class="text-center my-4 fw-bold">
-			  <a href="/" class="fst-italic"
-				>Continue shopping <i class="fa fa-arrow-right"></i
-			  ></a>
-			</div>
+			<%})%>
 			<%}%>
-		  </div>
+			
+			
 		</div>
-	  </div>
-		
+		</div>
 	
 		
 	<%- include('../layouts/footer') -%>

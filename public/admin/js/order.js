@@ -37,17 +37,35 @@ function cancelOrder(id){
     })
    
 }
-
 function printInvoice(divName) {
     var printContents = document.getElementById(divName).innerHTML;
     var originalContents = document.body.innerHTML;
-  
+
     document.body.innerHTML = printContents;
-  
+
+    // Add a style to limit the height of the printed content
+    var style = document.createElement('style');
+    style.innerHTML = `
+        @media print {
+            body {
+                height: auto;
+            }
+            ${divName} {
+                height: auto;
+                max-height: 100%; /* You can adjust this value as needed */
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
     window.print();
-  
+
+    // Remove the added style
+    document.head.removeChild(style);
+
     document.body.innerHTML = originalContents;
-  }
+}
+
 
   function returnOrder(id){
 
@@ -69,6 +87,7 @@ function printInvoice(divName) {
                 success:(res)=>{
                     if(res.success=== "return"){
                         $("#orderDetails").load(location.href + " #orderDetails");
+                        location.reload()
                         Swal.fire({
                             toast: true,
                             icon: "success",
