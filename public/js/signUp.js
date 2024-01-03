@@ -1,34 +1,4 @@
-// const form = document.getElementById('form')
-//         const userPassword = document.getElementById('userPassword')
-//         const usercPassword = document.getElementById('usercPassword')
-//         const error = document.getElementById('error')
-//         const number=document.getElementById('exampleInputEmail')
-//         function hideErrorMessage() {
-//             error.innerHTML = "";
-//         }
-//         function showErrorMessage(message) {
-//             error.innerHTML = `<div class=" alert text-danger bg-none " role="alert">${message}</div>`
-//         }
-//         function submitform(e) {
-//             if(userPassword.value !== usercPassword.value)
-//             {
-//                 showErrorMessage("Password and Confirm should be Same")
-//                 return false;
-//             }
-//             if (userPassword.value.length < 8) {
-//                 showErrorMessage("Password must be minimum 8 characters");
-//                 return false;
-//             } if (userPassword.value.length > 13) {
-//                 showErrorMessage("Password must be Lessthan 13 characters");
-//                 return false;
-//             } 
-//             if(number.value.length < 10) {
-//                 showErrorMessage("Number must be 10 digit")
-//                 return false;
-//             }
-//             hideErrorMessage()
-//             return true;
-//         }
+
 
         function usernameValidator() {
             const inputName = $("#form-holder").val();

@@ -67,8 +67,8 @@
                     </a>
                    
                         <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-2">
-                            <a href="/logOut" class="flex-c-m trans-04 p-lr-25">
-                                About
+                            <a href="/" class="flex-c-m trans-04 p-lr-25">
+                                About Us
                             </a>
                              
                           </span>	
@@ -86,10 +86,11 @@
                     
                   <img src="/public/img/-logo.png" alt="IMG-LOGO">
               </a>
-             <p class="m-auto" style="font-size: 17px;font-weight: 600;">
-              <span class="bg-black " style="display: block;color: #ffffff;padding-left: 9PX ;padding-right: 9PX;margin-bottom: -5px;margin-top: 10px;"> TIME</span>
-                TRONE
-             </p>
+              <a href="/" class="text-decoration-none"><p class="m-auto" style="font-size: 17px;font-weight: 600;color: black;">
+                <span style=" background-color: rgb(38, 38, 38); display: block;color: #ffffff;padding-left: 9PX ;padding-right: 9PX;margin-bottom: -5px;margin-top: 10px;"> TIME</span>
+                  TRONE
+               </p>
+            </a>
 
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
@@ -115,10 +116,20 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
                     <h5><a class="text-decoration-none text-dark ps-5" href="/products?category=collection">COLLECTION</a></h5>
                     </div>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti " data-notify="<%=locals.userCart.totalQuantity%>"id="cartCount" > 
+                        
+                      <a href="/cart"><i class="zmdi zmdi-shopping-cart cl2"></i></a>
+
+                  </div>
+                  <div id="wish-count">
+                      <a href="/wishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" >
+                          <i class="zmdi zmdi-favorite-outline"></i>
+                      </a>
+                  </div>
                     
                     <span class="nav-item nav-link text-center mb-2 mb-lg-0 ms-lg-3 ">
                         
-                        <div class="d-block d-lg-none">
+                        <!-- <div class="d-block d-lg-none">
                           <hr />
                           <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
                             <a class="nav-link fw-bold " href="/users/profile"
@@ -138,8 +149,8 @@
                               >Sign out</a
                             >
                           </span>
-                        </div>
-                        <div class="btn-group dropstart d-none d-lg-block">
+                        </div> -->
+                        <div class="btn-group droptop d-none d-lg-block">
                           <button
                             type="button"
                             class="btn dropdown-toggle button-div border"
@@ -154,12 +165,14 @@
                 
                             "
                           >
-                            <img
+                            <!-- <img
                               src="/Public/img/users/"
                               height="25px"
                               alt=""
                               style="border-radius: 20px;"
-                            />
+                            /> -->
+                            <i class="fa fa-user" aria-hidden="true"></i>
+
                           </button>
                           <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #ffffff;">
                             <li

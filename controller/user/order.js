@@ -2,9 +2,11 @@ const moment= require('moment')
 const orderModel=require('../../model/user/order')
 const productModel=require('../../model/admin/product')
 const couponModel=require('../../model/admin/coupons')
-
+const cartModel=require("../../model/user/cart")
 exports.viewPage=async(req,res)=>{
     try {
+        const userCart=await cartModel.findOne({customer:req.session.userID}).populate("products.name");
+
         allOrders=await orderModel
             .find({customer:req.session.userID})
             .sort({_id:-1})
@@ -14,7 +16,9 @@ exports.viewPage=async(req,res)=>{
         res.render("user/partials/orders",{
             allOrders,
             moment,
-            session:req.session.userID
+            session:req.session.userID,
+            userCartN
+            
         })
         
     } catch (error) {

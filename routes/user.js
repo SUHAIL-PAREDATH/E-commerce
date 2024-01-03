@@ -105,7 +105,7 @@ router.post("/cart/checkout/:id",async(req,res)=>{
     res.redirect(`/cart/checkout/${transactionID}`)
 })
 
-router.post("/cart/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
+router.post("/checkout/changeDefaultAddress",sessionCheck,checkout.defaultAddress)
 
 // ====================Order======================
 

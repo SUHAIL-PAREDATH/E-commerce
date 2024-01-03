@@ -134,21 +134,21 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body" >
-				<%if(allAddresses!=null){%>
-					<form action="/cart/checkout/changeDefaultAddress" method="post">
-					<% allAddresses.forEach((address,i) => { %>
-					<div class="form-check d-flex align-items-center rounded mb-2" style="border: 1px solid #dbdbdb;">
-						<input class="form-check-input mx-2" type="radio" name="DefaultAddress" id="radio<%=i+1%>" value="<%=address._id%>">
-						<label class="form-check-label m-2" for="radio<%=i+1%>" >
-						<span style="text-transform: None;">
-							<%=address.building%></br><%=address.address%> - <%=address.pincode%></br><%=address.country%></br></span>
-							<span style="font-size: 0.85rem;text-transform: None;">
-							Alternate No: <%=address.contactNumber%>
-							</span>
-						</label>
-					</div>
-					<%})%>    
-				</div>
+					<%if(allAddresses!=null){%>
+					  <form action="/checkout/changeDefaultAddress" method="post">
+					  <% allAddresses.forEach((address,i) => { %>
+						<div class="form-check d-flex align-items-center rounded mb-2" style="border: 1px solid #dbdbdb;">
+						  <input class="form-check-input mx-2" type="radio" name="DefaultAddress" id="radio<%=i+1%>" value="<%=address._id%>">
+						  <label class="form-check-label m-2" for="radio<%=i+1%>" >
+							 <span style="text-transform: None;">
+							  <%=address.building%></br><%=address.address%> - <%=address.pincode%></br><%=address.country%></br></span>
+							  <span style="font-size: 0.85rem;text-transform: None;">
+								Alternate No: <%=address.contactNumber%>
+							  </span>
+						  </label>
+						</div>
+						<%})%>    
+				  </div>
 				<div class="modal-footer d-flex justify-content-between">
 				<a href="/addresses" class="btn btn-sm  text-white" style="font-size: 0.85rem;text-transform: none; letter-spacing: 0px;background-color: rgb(29, 85, 23);">Add new address</a>
 				<div>

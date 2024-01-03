@@ -76,18 +76,13 @@
 
                 <div class="right-top-bar flex-w h-full">
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Help & FAQs
+                        Contact Us
                     </a>
-                    <%if(session){%>
                         <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-2">
-                            <a href="/logOut" class="flex-c-m trans-04 p-lr-25">
-                                LogOut
+                            <a href="/" class="flex-c-m trans-04 p-lr-25">
+                                About Us
                             </a>
-                              <% }else{%>
-                                <a href="/login" class="flex-c-m trans-04 p-lr-25">
-                                    Login
-                                </a>
-                                <%}%>
+                              
                           </span>	
                     
 
@@ -104,10 +99,11 @@
                     
                     <img src="/public/img/-logo.png" alt="IMG-LOGO">
                 </a>
-               <p class="m-auto" style="font-size: 17px;font-weight: 600;">
+               <a href="/" class="text-decoration-none"><p class="m-auto" style="font-size: 17px;font-weight: 600;color: black;">
                 <span style=" background-color: rgb(38, 38, 38); display: block;color: #ffffff;padding-left: 9PX ;padding-right: 9PX;margin-bottom: -5px;margin-top: 10px;"> TIME</span>
                   TRONE
                </p>
+            </a>
                 <h3 class="logoText">
                     
                 </h3>
@@ -163,12 +159,12 @@
                             <%}%>
                             <span class="nav-item nav-link text-center mb-2 mb-lg-0 ms-lg-3 ">
                                 <% if(session){%>
-                                <div class="d-block d-lg-none">
+                                <!-- <div class="d-block d-lg-none">
                                   <hr />
                                   <span class="nav-item nav-link text-center mb-2 mb-lg-0 mx-3">
                                     <a class="nav-link fw-bold " href="/users/profile"
                                       ><img
-                                        src="/Public/img/users/<%=locals.currentUser.photo%>"
+                                        src="/Public/img/users/"
                                         height="25px"
                                         alt=""
                                         class="mx-2"
@@ -183,11 +179,11 @@
                                       >Sign out</a
                                     >
                                   </span>
-                                </div>
-                                <div class="btn-group dropstart d-none d-lg-block">
+                                </div> -->
+                                <div class="btn-group droptop d-none d-lg-block border ">
                                   <button
                                     type="button"
-                                    class="btn dropdown-toggle button-div border"
+                                    class="btn dropdown-toggle button-div "
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                     style="
@@ -199,20 +195,21 @@
                         
                                     "
                                   >
-                                    <img
+                                    <!-- <img
                                       src="/Public/img/users/<%=locals.currentUser.photo%>"
                                       height="25px"
                                       alt=""
                                       style="border-radius: 20px;"
-                                    />
+                                    /> -->
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                   </button>
-                                  <ul class="dropdown-menu" style="font-size: 0.75rem;background-color: #ffffff;">
-                                    <li
+                                  <ul class="dropdown-menu" style="font-size: 0.85rem;background-color: #ffffff;">
+                                    <!-- <li
                                       class="dropdown-item border-bottom"
                                       style="pointer-events: none;color: rgb(20, 141, 247);"
                                     >
                                       <%=locals.currentUser.name%>
-                                    </li>
+                                    </li> -->
                                     <li >
                                       <a class="dropdown-item" id="icon-item" href="/profile">Profile</a>
                                     </li>

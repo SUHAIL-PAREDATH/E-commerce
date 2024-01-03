@@ -42,7 +42,7 @@ exports.postSignIn=async(req,res)=>{
         }else{
             res.render('admin/login',{
                 documentTitle: "Admin Sign In",
-                errorMessage: "Incorrect Password",
+                errorMessage: "Incorrect email",
                 })
               }
 

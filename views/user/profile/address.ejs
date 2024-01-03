@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Checkout</title>
+	<title>TimeTrone /Address</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -54,58 +54,81 @@
                             <input
                               type="text"
                               class="form-control"
-                              id="form-holder"
+                              id="buildNo"
+                              onkeyup="build()"
                               name="building"
                               placeholder="Building Name/No."
-                              required
                               style="text-transform: none;"
                             />
+                            <span
+                            id="buldmssg"
+                            class="text-danger rounded"
+                            style="font-size: 0.75rem; text-transform: none"></span>
                           </div> 
                           <div class="mb-3">
                             <input
                               type="text"
                               class="form-control"
-                              id="form-holder"
+                              id="address"
+                              onkeyup="addresscheck()"
                               placeholder="Address"
-                              name="address"
+                              name="address" 
                               required
                               style="text-transform: none;"
                             />
+                            <span
+                            id="addressmssg"
+                            class="text-danger rounded"
+                            style="font-size: 0.75rem; text-transform: none"></span>
                           </div>
                           <div class="mb-3">
                               <input
                                 type="number"
                                 class="form-control"
-                                id="form-holder"
+                                id="pincode"
+                                onkeyup="pincodeCheck()"
                                 placeholder="Pin Code"
                                 name="pincode"
                                 required
                                 style="text-transform: none;"
                                 pattern="[0-9]{6}"
                               />
+                              <span
+                              id="pincodemssg"
+                              class="text-danger rounded"
+                              style="font-size: 0.75rem; text-transform: none"></span>
                             </div>
                           <div class="mb-3">
                               <input
                                 type="text"
                                 class="form-control"
-                                id="form-holder"
+                                id="country"
+                                onkeyup="countryCheck()"
                                 placeholder="Country"
                                 name="country"
-                                required
                                 style="text-transform: none;"
                               />
+                              <span
+                              id="countrymssg"
+                              class="text-danger rounded"
+                              style="font-size: 0.75rem; text-transform: none"></span>
                             </div>
                             <div class="mb-3">
                               <input
                                 type="number"
                                 class="form-control"
-                                id="form-holder"
+                                id="number"
+                                onkeyup="numberCheck()"
                                 placeholder="Contact Number"
                                 name="contactNumber"
                                 required
                                 style="text-transform: none;"
                                 pattern="[1-9]{1}[0-9]{9}"
                               />
+                              <span
+                              id="numbermssg"
+                              class="text-danger rounded"
+                              style="font-size: 0.75rem; text-transform: none"></span>
                             </div>
                       </div>
                       <div class="modal-footer">
@@ -116,7 +139,7 @@
                         >
                           Close
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
                           Save changes
                         </button>
                       </form> 
@@ -191,38 +214,17 @@
 	<script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/public/vendor/select2/select2.min.js"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
 <!--===============================================================================================-->
 	<script src="/public/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/public/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
 
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
 <!--===============================================================================================-->
 	<script src="/public/js/main.js"></script>
 	<!--===============================================================================================-->
 <!-- BOOTSTRAP -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+<script type="text/javascript" src="/public/admin/vendor/jquery/jquery.min.js"></script>
+<script src="/public/js/addressVali.js"></script>
 </body>
 </html>
