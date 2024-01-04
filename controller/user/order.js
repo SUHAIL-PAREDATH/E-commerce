@@ -17,7 +17,7 @@ exports.viewPage=async(req,res)=>{
             allOrders,
             moment,
             session:req.session.userID,
-            userCartN
+            userCart
             
         })
         
@@ -29,6 +29,7 @@ exports.viewPage=async(req,res)=>{
 
 exports.details=async(req,res)=>{
     try {
+        const userCart=await cartModel.findOne({customer:req.session.userID}).populate("products.name");
         const currentOrder=await orderModel
         .findById(req.params.id)
         .populate("summary.product")
@@ -40,6 +41,7 @@ exports.details=async(req,res)=>{
                 documentTitle: "Order Details",
                 currentOrder,
                  moment,
+                 userCart
             })
         }else {
             res.redirect("/pageNotFound");
