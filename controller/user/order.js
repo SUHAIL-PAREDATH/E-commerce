@@ -36,7 +36,7 @@ exports.details=async(req,res)=>{
         .populate("couponUsed")
         .sort("");
 
-        if(currentOrder){
+        if(currentOrder && currentOrder.status !=='Cancelled'){
             res.render("user/partials/orderDetails",{
                 documentTitle: "Order Details",
                 currentOrder,
@@ -44,7 +44,7 @@ exports.details=async(req,res)=>{
                  userCart
             })
         }else {
-            res.redirect("/pageNotFound");
+            res.redirect("/orders");
           }
     } catch (error) {
         console.log("error on getting order detail page :"+error)
@@ -70,6 +70,7 @@ exports.cancel=async(req,res)=>{
         res.json({
             success:'cancelled'
         })
+        res.redirect('/orders')
     } catch (error) {
         
     }

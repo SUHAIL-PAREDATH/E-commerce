@@ -3,8 +3,8 @@ const bcrypt=require("bcrypt")
 
 exports.getSignIn=(req,res)=>{
     try{
-        if(req.session.Admin){
-            res.redirect("/") 
+        if(req.session.admin){
+            res.redirect("/admin") 
      }else{
         res.render("admin/login",{
             documentTitle:"Admin Sign in",
@@ -31,7 +31,7 @@ exports.postSignIn=async(req,res)=>{
             if(hashedCheck){
                 req.session.admin=req.body.email;
                 console.log("admin success")
-                res.redirect("/admin/index")
+                res.redirect("/admin")
             }else{
                 res.render('admin/login',{
                     documentTitle: "Admin Sign In",

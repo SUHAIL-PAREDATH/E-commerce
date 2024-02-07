@@ -20,7 +20,7 @@ const sessionCheck=require("../middleware/admin/sessionCheck")
 //========================== SIGN IN ===============================
 
 router.
-route('/')
+route('/login')
 .get(signIn.getSignIn)
 .post(signIn.postSignIn),
 
@@ -35,7 +35,7 @@ router
 // ==========================DashBord===============================
 
 router.
-route('/index')
+route('/')
 .get(sessionCheck,dashboard.view)
 .put(sessionCheck,dashboard.chartDate)
 

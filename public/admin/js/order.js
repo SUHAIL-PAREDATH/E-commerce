@@ -18,6 +18,7 @@ function cancelOrder(id){
                 success:(res)=>{
                     if(res.success=== "cancelled"){
                         $("#orderDetails").load(location.href + " #orderDetails");
+                        location.reload()
                         Swal.fire({
                             toast: true,
                             icon: "success",
